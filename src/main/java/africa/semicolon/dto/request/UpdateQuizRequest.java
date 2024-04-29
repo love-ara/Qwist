@@ -10,5 +10,5 @@ public class UpdateQuizRequest {
     private String quizId;
     private String quizName;
     private String quizDescription;
-    private List<UpdateQuestionRequest> updateQuestionRequest = new ArrayList<>();
+    private UpdateQuestionRequest updateQuestionRequest = new UpdateQuestionRequest();
 }

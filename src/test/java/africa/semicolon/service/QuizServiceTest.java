@@ -1,5 +1,6 @@
 package africa.semicolon.service;
 
+import africa.semicolon.data.repository.QuestionRepository;
 import africa.semicolon.data.repository.QuizRepository;
 import africa.semicolon.dto.request.*;
 import africa.semicolon.dto.response.CreateQuizResponse;
@@ -17,22 +18,22 @@ import static org.junit.gen5.api.Assertions.assertThrows;
 
 @SpringBootTest
 public class QuizServiceTest {
-    private final QuizService quizService;
-    private final QuizRepository quizRepository;
+    @Autowired
+    private  QuizService quizService;
+    @Autowired
+    private  QuizRepository quizRepository;
+    @Autowired
+    private QuestionRepository questionRepository;
 
     private CreateQuizRequest createQuizRequest;
     private CreateQuizResponse createQuizResponse;
     private DeleteQuizRequest deleteQuizRequest;
 
-    @Autowired
-    public QuizServiceTest(QuizService quizService, QuizRepository quizRepository){
-        this.quizService = quizService;
-        this.quizRepository = quizRepository;
-    }
 
     @BeforeEach
     public void setUp(){
         quizRepository.deleteAll();
+        questionRepository.deleteAll();
 
         createQuizRequest = new CreateQuizRequest();
         createQuizRequest.setQuizName("Quiz Name");
@@ -69,6 +70,7 @@ public class QuizServiceTest {
     public void quizCanBeUpdatedTest(){
 
         var quiz = quizService.createQuiz(createQuizRequest);
+        System.out.println(quiz.getQuizId());
 
         createQuizResponse = new CreateQuizResponse();
         createQuizResponse.setQuizId(quiz.getQuizId());
@@ -79,14 +81,15 @@ public class QuizServiceTest {
         updateQuizRequest.setQuizDescription("Updated Quiz Description");
 
         UpdateQuestionRequest updateQuestionRequest = new UpdateQuestionRequest();
-        updateQuestionRequest.setQuestionContent("Question Content");
+        updateQuestionRequest.setQuestionId(updateQuizRequest.getUpdateQuestionRequest().getQuestionId());
+        updateQuestionRequest.setQuestionContent("Updated Question Content");
         OptionRequest optionRequest = new OptionRequest();
         optionRequest.setOptionContent("Option Content");
 
         updateQuestionRequest.setOptions(List.of(optionRequest));
         updateQuestionRequest.setAnswer("answer");
 
-        updateQuizRequest.setUpdateQuestionRequest(List.of(updateQuestionRequest));
+        updateQuizRequest.setUpdateQuestionRequest(updateQuestionRequest);
         quizService.updateQuiz(updateQuizRequest);
     }
 

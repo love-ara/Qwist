@@ -11,14 +11,16 @@ import africa.semicolon.dto.response.CreateQuestionResponse;
 import africa.semicolon.dto.response.DeleteQuestionResponse;
 import africa.semicolon.dto.response.UpdateQuestionResponse;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@AllArgsConstructor
+//@AllArgsConstructor
 public class QuestionServiceImplementation implements QuestionService{
+    @Autowired
     private QuestionRepository questionRepository;
 
     @Override
@@ -35,10 +37,8 @@ public class QuestionServiceImplementation implements QuestionService{
     @Override
     public UpdateQuestionResponse updateQuestion(UpdateQuestionRequest updateQuestionRequest) {
         Question oldQuestion = findQuestionBy(updateQuestionRequest.getQuestionId());
-        Question question = new Question();
-        updateQuestionMap(updateQuestionRequest, question);
-        questionRepository.delete(oldQuestion);
-        var updatedQuestion = questionRepository.save(question);
+        updateQuestMap(updateQuestionRequest, oldQuestion);
+        var updatedQuestion = questionRepository.save(oldQuestion);
 
         return updateQuestionResponseMap(updateQuestionRequest, updatedQuestion);
     }
@@ -54,10 +54,10 @@ public class QuestionServiceImplementation implements QuestionService{
         return deleteQuestionResponse;
     }
 
-    private static void updateQuestionMap(UpdateQuestionRequest updateQuestionRequest, Question question) {
-        question.setQuestionId(updateQuestionRequest.getQuestionId());
-        updateQuestMap(updateQuestionRequest, question);
-    }
+//    private static void updateQuestionMap(UpdateQuestionRequest updateQuestionRequest, Question question) {
+//        question.setQuestionId(updateQuestionRequest.getQuestionId());
+//        updateQuestMap(updateQuestionRequest, question);
+//    }
     private static void updateQuestMap(UpdateQuestionRequest updateQuestionRequest, Question question) {
         question.setQuestionContent(updateQuestionRequest.getQuestionContent());
         List<Option> options = new ArrayList<>();

@@ -55,6 +55,7 @@ public class QuestionServiceTest {
     @Test
     public void testThatQuestionCanBeUpdated(){
         var question = questionService.createQuestion(createQuestionRequest);
+        assertThat(questionRepository.findById(question.getQuestionId()).get().getQuestionContent(), is("Question content"));
 
         UpdateQuestionRequest updateQuestionRequest = new UpdateQuestionRequest();
         updateQuestionRequest.setQuestionId(question.getQuestionId());
@@ -66,6 +67,8 @@ public class QuestionServiceTest {
         questionService.updateQuestion(updateQuestionRequest);
 
         assertThat(questionRepository.count(), is(1L));
+        assertThat(questionRepository.findById(question.getQuestionId()).get().getQuestionContent(), is("Updated question"));
+
         assertTrue(questionRepository.existsByQuestionContent("Updated question"));
     }
 
