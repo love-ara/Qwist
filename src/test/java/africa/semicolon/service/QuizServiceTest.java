@@ -2,12 +2,13 @@ package africa.semicolon.service;
 
 import africa.semicolon.data.repository.QuizRepository;
 import africa.semicolon.dto.request.*;
+import africa.semicolon.dto.response.CreateQuizResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Arrays;
+
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -20,6 +21,9 @@ public class QuizServiceTest {
     private final QuizRepository quizRepository;
 
     private CreateQuizRequest createQuizRequest;
+    private CreateQuizResponse createQuizResponse;
+    private DeleteQuizRequest deleteQuizRequest;
+
     @Autowired
     public QuizServiceTest(QuizService quizService, QuizRepository quizRepository){
         this.quizService = quizService;
@@ -42,6 +46,9 @@ public class QuizServiceTest {
         createQuestionRequest.setOption(List.of(optionRequest));
         createQuestionRequest.setAnswer("answer");
         createQuizRequest.setCreateQuestionRequest(List.of(createQuestionRequest));
+
+
+
     }
 
     @Test
@@ -52,17 +59,23 @@ public class QuizServiceTest {
 
     @Test
     public void testThatAQuizCanNotBeCreatedTwice(){
+
         quizService.createQuiz(createQuizRequest);
+
         assertThrows(IllegalArgumentException.class, ()-> quizService.createQuiz(createQuizRequest));
     }
 
     @Test
     public void quizCanBeUpdatedTest(){
+
         var quiz = quizService.createQuiz(createQuizRequest);
+
+        createQuizResponse = new CreateQuizResponse();
+        createQuizResponse.setQuizId(quiz.getQuizId());
 
         UpdateQuizRequest updateQuizRequest = new UpdateQuizRequest();
         updateQuizRequest.setQuizId(quiz.getQuizId());
-        updateQuizRequest.setQuizName("Updated Quiz Name");
+        updateQuizRequest.setQuizName(quiz.getQuizName());
         updateQuizRequest.setQuizDescription("Updated Quiz Description");
 
         UpdateQuestionRequest updateQuestionRequest = new UpdateQuestionRequest();
@@ -75,5 +88,19 @@ public class QuizServiceTest {
 
         updateQuizRequest.setUpdateQuestionRequest(List.of(updateQuestionRequest));
         quizService.updateQuiz(updateQuizRequest);
+    }
+
+    @Test
+    public void quizCanBeDeletedTest(){
+
+        var quiz = quizService.createQuiz(createQuizRequest);
+
+        deleteQuizRequest = new DeleteQuizRequest();
+        deleteQuizRequest.setQuizId(quiz.getQuizId());
+        assertThat(quizRepository.count(), is(1L));
+
+
+        quizService.deleteQuiz(deleteQuizRequest);
+        assertThat(quizRepository.count(), is(0L));
     }
 }

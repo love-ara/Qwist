@@ -2,6 +2,7 @@ package africa.semicolon.service;
 
 import africa.semicolon.data.repository.QuestionRepository;
 import africa.semicolon.dto.request.CreateQuestionRequest;
+import africa.semicolon.dto.request.DeleteQuestionRequest;
 import africa.semicolon.dto.request.OptionRequest;
 import africa.semicolon.dto.request.UpdateQuestionRequest;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
+
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -65,6 +67,18 @@ public class QuestionServiceTest {
 
         assertThat(questionRepository.count(), is(1L));
         assertTrue(questionRepository.existsByQuestionContent("Updated question"));
+    }
+
+    @Test
+    public void  questionCanBeDeletedTest(){
+        var question = questionService.createQuestion(createQuestionRequest);
+        assertThat(questionRepository.count(), is(1L));
+
+        DeleteQuestionRequest deleteQuestionRequest = new DeleteQuestionRequest();
+        deleteQuestionRequest.setQuestionId(question.getQuestionId());
+        questionService.deleteQuestion(deleteQuestionRequest);
+
+        assertThat(questionRepository.count(), is(0L));
     }
 
 

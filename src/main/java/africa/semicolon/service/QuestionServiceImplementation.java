@@ -4,9 +4,11 @@ import africa.semicolon.data.model.Option;
 import africa.semicolon.data.model.Question;
 import africa.semicolon.data.repository.QuestionRepository;
 import africa.semicolon.dto.request.CreateQuestionRequest;
+import africa.semicolon.dto.request.DeleteQuestionRequest;
 import africa.semicolon.dto.request.OptionRequest;
 import africa.semicolon.dto.request.UpdateQuestionRequest;
 import africa.semicolon.dto.response.CreateQuestionResponse;
+import africa.semicolon.dto.response.DeleteQuestionResponse;
 import africa.semicolon.dto.response.UpdateQuestionResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -41,8 +43,22 @@ public class QuestionServiceImplementation implements QuestionService{
         return updateQuestionResponseMap(updateQuestionRequest, updatedQuestion);
     }
 
+    @Override
+    public DeleteQuestionResponse deleteQuestion(DeleteQuestionRequest deleteQuestionRequest) {
+        Question question = findQuestionBy(deleteQuestionRequest.getQuestionId());
+
+        DeleteQuestionResponse deleteQuestionResponse = new DeleteQuestionResponse();
+        deleteQuestionResponse.setQuestionId(question.getQuestionId());
+        questionRepository.delete(question);
+
+        return deleteQuestionResponse;
+    }
+
     private static void updateQuestionMap(UpdateQuestionRequest updateQuestionRequest, Question question) {
         question.setQuestionId(updateQuestionRequest.getQuestionId());
+        updateQuestMap(updateQuestionRequest, question);
+    }
+    private static void updateQuestMap(UpdateQuestionRequest updateQuestionRequest, Question question) {
         question.setQuestionContent(updateQuestionRequest.getQuestionContent());
         List<Option> options = new ArrayList<>();
         for(OptionRequest optionRequest : updateQuestionRequest.getOptions()) {
