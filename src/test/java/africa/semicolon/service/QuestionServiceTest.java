@@ -39,7 +39,7 @@ public class QuestionServiceTest {
         OptionRequest optionRequest = new OptionRequest();
         optionRequest.setOptionContent("Option content");
         createQuestionRequest.setOption(List.of(optionRequest));
-        createQuestionRequest.setAnswer("Answer");
+        createQuestionRequest.setAnswer("answer");
     }
     @Test
     public void questionCanBeCreatedTest(){

@@ -2,17 +2,14 @@ package africa.semicolon.service;
 
 
 import africa.semicolon.data.model.Question;
-import africa.semicolon.data.repository.QuizRepository;
 import africa.semicolon.data.repository.UserRepository;
-import africa.semicolon.dto.request.RegisterUserRequest;
-import africa.semicolon.dto.request.SelectQuizRequest;
-import africa.semicolon.dto.request.UserLoginRequest;
-import africa.semicolon.dto.request.UserLogoutRequest;
+import africa.semicolon.dto.request.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -23,10 +20,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class UserServiceTest {
     private final UserService userService;
     private final UserRepository userRepository;
-    private QuizService quizService;
+    private final QuizService quizService;
     private RegisterUserRequest registerUserRequest;
     private UserLoginRequest userLoginRequest;
     private UserLogoutRequest userLogoutRequest;
+    private CreateQuizRequest createQuizRequest;
 
     @Autowired
     public UserServiceTest(UserService userService, UserRepository userRepository, QuizService quizService) {
@@ -52,6 +50,20 @@ public class UserServiceTest {
 
         userLogoutRequest = new UserLogoutRequest();
         userLogoutRequest.setUsername("username");
+
+        createQuizRequest = new CreateQuizRequest();
+        createQuizRequest.setQuizName("Quiz Name");
+        createQuizRequest.setQuizDescription("Quiz Description");
+
+        CreateQuestionRequest createQuestionRequest = new CreateQuestionRequest();
+        createQuestionRequest.setQuestionContent("Question Content");
+        OptionRequest optionRequest = new OptionRequest();
+        optionRequest.setOptionContent("Option Content");
+
+        createQuestionRequest.setOption(List.of(optionRequest));
+        createQuestionRequest.setAnswer("answer");
+        createQuizRequest.setCreateQuestionRequest(List.of(createQuestionRequest));
+
 
     }
 
@@ -96,16 +108,19 @@ public class UserServiceTest {
     }
 
     @Test
-    public void registeredUserCanTakeQuizTest(){
+    public void registeredUserCanSelectQuizTest(){
         userService.registerUser(registerUserRequest);
         userService.login(userLoginRequest);
         assertThat(userRepository.count(), is(1L));
         assertThat(userRepository.findAll().getFirst().isLoggedIn(), is(true));
 
 
+        var quiz = quizService.createQuiz(createQuizRequest);
+
+
         SelectQuizRequest selectQuizRequest = new SelectQuizRequest();
-        selectQuizRequest.setQuizId("quizId");
-        selectQuizRequest.setQuizCategory("quizCategory");
+        selectQuizRequest.setQuizId(quiz.getQuizId());
+        //selectQuizRequest.setQuizCategory("quizCategory");
 
         userService.selectQuiz(selectQuizRequest);
 
@@ -113,6 +128,28 @@ public class UserServiceTest {
 
         assertThat(quizQuestions, not(empty()));
 
+    }
+
+    @Test
+    public void registeredUserCanTakeQuizTest(){
+        userService.registerUser(registerUserRequest);
+        userService.login(userLoginRequest);
+        assertThat(userRepository.count(), is(1L));
+        assertThat(userRepository.findAll().getFirst().isLoggedIn(), is(true));
+
+        var quiz = quizService.createQuiz(createQuizRequest);
+
+        SelectQuizRequest selectQuizRequest = new SelectQuizRequest();
+        selectQuizRequest.setQuizId(quiz.getQuizId());
+        userService.selectQuiz(selectQuizRequest);
+
+        TakeQuizRequest takeQuizRequest = new TakeQuizRequest();
+        takeQuizRequest.setUsername(userLoginRequest.getUsername());
+        takeQuizRequest.setQuizId(quiz.getQuizId());
+        takeQuizRequest.setQuizName(quiz.getQuizName());
+        takeQuizRequest.setAnswer(List.of("answer"));
+
+        userService.takeQuiz(takeQuizRequest);
     }
 
 }

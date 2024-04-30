@@ -122,11 +122,7 @@ public class QuizServiceImplementation implements QuizService{
     @Override
     public List<Question> getQuizQuestions(String quizId) {
         Quiz quiz = findQuizBy(quizId);
-        List<Question> questions = new ArrayList<>();
-        for (Question question : quiz.getQuestions()) {
-
-        }
-        return null;
+        return quiz.getQuestions();
     }
 }
 

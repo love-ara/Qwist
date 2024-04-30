@@ -5,15 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e13f1b6b-4d57-4193-85b7-7424b09e1c86" name="Changes" comment="commit">
+      <change afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/data/model/UserAnswer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/dto/request/AnswerRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/dto/request/TakeQuizRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/dto/response/TakeQuizResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/africa/semicolon/data/model/Option.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/data/model/Option.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/africa/semicolon/data/model/Question.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/data/model/Question.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/africa/semicolon/data/model/Quiz.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/data/model/Quiz.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/africa/semicolon/data/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/data/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/africa/semicolon/service/QuestionServiceImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/service/QuestionServiceImplementation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/africa/semicolon/service/QuizService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/service/QuizService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/africa/semicolon/service/QuizServiceImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/service/QuizServiceImplementation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/africa/semicolon/service/QuizServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/africa/semicolon/service/QuizServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/africa/semicolon/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/africa/semicolon/service/UserServiceImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/service/UserServiceImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/africa/semicolon/service/QuestionServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/africa/semicolon/service/QuestionServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/africa/semicolon/service/UserServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/africa/semicolon/service/UserServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,51 +90,52 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "JUnit.QuestionServiceTest.executor": "Run",
-    "JUnit.QuestionServiceTest.noRepeatedQuestionTest.executor": "Run",
-    "JUnit.QuestionServiceTest.questionCanBeCreatedTest.executor": "Run",
-    "JUnit.QuestionServiceTest.questionCanBeDeletedTest.executor": "Run",
-    "JUnit.QuestionServiceTest.testThatQuestionCanBeUpdated.executor": "Run",
-    "JUnit.QuizServiceTest.executor": "Run",
-    "JUnit.QuizServiceTest.quizCanBeUpdatedTest.executor": "Run",
-    "JUnit.QuizServiceTest.testCreateQuiz.executor": "Run",
-    "JUnit.QuizServiceTest.testThatAQuizCanNotBeCreatedTwice.executor": "Run",
-    "JUnit.UserServiceTest.executor": "Run",
-    "JUnit.UserServiceTest.userCanBeRegisteredTest.executor": "Run",
-    "JUnit.UserServiceTest.userCanLoginTest.executor": "Run",
-    "JUnit.UserServiceTest.userCanLogoutTest.executor": "Run",
-    "JUnit.UserServiceTest.userCanNotBeRegisteredTest.executor": "Run",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.go.formatter.settings.were.checked": "true",
-    "RunOnceActivity.go.migrated.go.modules.settings": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Spring Boot.ToQuizOrNotToQuiz.executor": "Run",
-    "git-widget-placeholder": "main",
-    "go.import.settings.migrated": "true",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "onboarding.tips.debug.path": "C:/Users/Administrator/IdeaProjects/to_quiz_or_not_to_quiz/src/main/java/africa/semicolon/Main.java",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;JUnit.QuestionServiceTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.QuestionServiceTest.noRepeatedQuestionTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.QuestionServiceTest.questionCanBeCreatedTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.QuestionServiceTest.questionCanBeDeletedTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.QuestionServiceTest.testThatQuestionCanBeUpdated.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.QuizServiceTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.QuizServiceTest.quizCanBeUpdatedTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.QuizServiceTest.testCreateQuiz.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.QuizServiceTest.testThatAQuizCanNotBeCreatedTwice.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserServiceTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserServiceTest.registeredUserCanTakeQuizTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserServiceTest.userCanBeRegisteredTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserServiceTest.userCanLoginTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserServiceTest.userCanLogoutTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserServiceTest.userCanNotBeRegisteredTest.executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Spring Boot.ToQuizOrNotToQuiz.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/Administrator/IdeaProjects/to_quiz_or_not_to_quiz/src/main/java/africa/semicolon/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
-      <recent name="africa.semicolon.dto.request" />
       <recent name="africa.semicolon.dto.response" />
+      <recent name="africa.semicolon.dto.request" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Administrator\IdeaProjects\to_quiz_or_not_to_quiz\src\test\java\resources" />
@@ -142,7 +145,7 @@
       <recent name="africa.semicolon.service" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.QuizServiceTest">
+  <component name="RunManager" selected="JUnit.UserServiceTest.registeredUserCanTakeQuizTest">
     <configuration name="QuestionServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="to_quiz_or_not_to_quiz" />
       <extension name="coverage">
@@ -189,22 +192,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="QuizServiceTest.testCreateQuiz" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="to_quiz_or_not_to_quiz" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="africa.semicolon.service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="africa.semicolon.service" />
-      <option name="MAIN_CLASS_NAME" value="africa.semicolon.service.QuizServiceTest" />
-      <option name="METHOD_NAME" value="testCreateQuiz" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="QuizServiceTest.testThatAQuizCanNotBeCreatedTwice" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="to_quiz_or_not_to_quiz" />
       <extension name="coverage">
@@ -221,13 +208,29 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="UserServiceTest.registeredUserCanTakeQuizTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="to_quiz_or_not_to_quiz" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="africa.semicolon.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="africa.semicolon.service" />
+      <option name="MAIN_CLASS_NAME" value="africa.semicolon.service.UserServiceTest" />
+      <option name="METHOD_NAME" value="registeredUserCanTakeQuizTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.UserServiceTest.registeredUserCanTakeQuizTest" />
         <item itemvalue="JUnit.QuizServiceTest" />
         <item itemvalue="JUnit.QuizServiceTest.quizCanBeUpdatedTest" />
         <item itemvalue="JUnit.QuestionServiceTest" />
         <item itemvalue="JUnit.QuizServiceTest.testThatAQuizCanNotBeCreatedTwice" />
-        <item itemvalue="JUnit.QuizServiceTest.testCreateQuiz" />
       </list>
     </recent_temporary>
   </component>
@@ -256,7 +259,8 @@
       <workItem from="1714126701404" duration="818000" />
       <workItem from="1714205871571" duration="1185000" />
       <workItem from="1714240929857" duration="583000" />
-      <workItem from="1714380867854" duration="26489000" />
+      <workItem from="1714380867854" duration="33570000" />
+      <workItem from="1714472816339" duration="1367000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <option name="closed" value="true" />
@@ -274,7 +278,23 @@
       <option name="project" value="LOCAL" />
       <updated>1714406638479</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="commit">
+      <option name="closed" value="true" />
+      <created>1714447739781</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1714447739781</updated>
+    </task>
+    <task id="LOCAL-00004" summary="commit">
+      <option name="closed" value="true" />
+      <created>1714450908740</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1714450908740</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

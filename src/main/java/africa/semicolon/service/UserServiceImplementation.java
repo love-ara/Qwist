@@ -2,14 +2,8 @@ package africa.semicolon.service;
 
 import africa.semicolon.data.model.User;
 import africa.semicolon.data.repository.UserRepository;
-import africa.semicolon.dto.request.RegisterUserRequest;
-import africa.semicolon.dto.request.SelectQuizRequest;
-import africa.semicolon.dto.request.UserLoginRequest;
-import africa.semicolon.dto.request.UserLogoutRequest;
-import africa.semicolon.dto.response.RegisterUserResponse;
-import africa.semicolon.dto.response.SelectQuizResponse;
-import africa.semicolon.dto.response.UserLoginResponse;
-import africa.semicolon.dto.response.UserLogoutResponse;
+import africa.semicolon.dto.request.*;
+import africa.semicolon.dto.response.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -65,6 +59,12 @@ public class UserServiceImplementation implements UserService{
 
     @Override
     public SelectQuizResponse selectQuiz(SelectQuizRequest selectQuizRequest) {
+        //registered, logged-in, not asked too many details
+        return null;
+    }
+
+    @Override
+    public TakeQuizResponse takeQuiz(TakeQuizRequest takeQuizRequest) {
         return null;
     }
 //
