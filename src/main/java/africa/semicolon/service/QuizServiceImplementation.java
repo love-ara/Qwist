@@ -8,24 +8,20 @@ import africa.semicolon.data.repository.QuizRepository;
 import africa.semicolon.dto.request.*;
 import africa.semicolon.dto.response.CreateQuizResponse;
 import africa.semicolon.dto.response.DeleteQuizResponse;
-import africa.semicolon.dto.response.UpdateQuestionResponse;
 import africa.semicolon.dto.response.UpdateQuizResponse;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-//@AllArgsConstructor
+@AllArgsConstructor
 public class QuizServiceImplementation implements QuizService{
-    @Autowired
     private QuizRepository quizRepository;
-    @Autowired
     private QuestionRepository questionRepository;
-    @Autowired
     private QuestionService questionService;
 
 
@@ -77,7 +73,7 @@ public class QuizServiceImplementation implements QuizService{
     }
 
     @Override
-    public UpdateQuestionResponse updateQuiz(UpdateQuizRequest updateQuizRequest) {
+    public UpdateQuizResponse updateQuiz(UpdateQuizRequest updateQuizRequest) {
         Quiz quiz = quizRepository.findByQuizName(updateQuizRequest.getQuizName());
         if(quiz == null){
             throw new IllegalArgumentException("A quiz doesn't exists");
@@ -85,29 +81,12 @@ public class QuizServiceImplementation implements QuizService{
 
         quiz.setQuizName(updateQuizRequest.getQuizName());
         quiz.setQuizDescription(updateQuizRequest.getQuizDescription());
-//        UpdateQuestionRequest updateQuestionRequest = updateQuizRequest.getUpdateQuestionRequest();
-//        Question question = questionRepository.findById(updateQuestionRequest.getQuestionId()).get();
-//        List<Option> options = new ArrayList<>();
-//        question.setQuestionContent(updateQuestionRequest.getQuestionContent());
-//        for(OptionRequest optionRequest : updateQuestionRequest.getOptions()) {
-//            Option option = new Option();
-//            option.setOptionContent(optionRequest.getOptionContent());
-//            options.add(option);
-//        }
-//        question.setOptions(options);
-//        question.setCorrectAnswer(updateQuestionRequest.getAnswer());
-//        questionRepository.save(question);
+
+        questionService.updateQuestion(updateQuizRequest.getUpdateQuestionRequest());
 
 
-//        System.out.println("agghghgh");
-//        var question = questionRepository.findById(response.getQuestionId()).get();
-//        quiz.getQuestions().removeIf(q -> q.getQuestionId().equals(question.getQuestionId()));
-//        quiz.getQuestions().add(question);
-//        System.out.println(question.getQuestionContent());
         var updatedQuiz = quizRepository.save(quiz);
 
-        System.out.println("successfully updated quiz");
-        System.out.println("from services: "+ updatedQuiz.getQuizId());
 
         UpdateQuizResponse updateQuizResponse = new UpdateQuizResponse();
         updateQuizResponse.setUpdateQuizId(updatedQuiz.getQuizId());
@@ -116,7 +95,7 @@ public class QuizServiceImplementation implements QuizService{
 
 
 
-        return questionService.updateQuestion(updateQuizRequest.getUpdateQuestionRequest());
+        return updateQuizResponse;
     }
 
     @Override

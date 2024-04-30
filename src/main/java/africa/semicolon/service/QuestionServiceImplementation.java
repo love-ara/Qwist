@@ -11,16 +11,14 @@ import africa.semicolon.dto.response.CreateQuestionResponse;
 import africa.semicolon.dto.response.DeleteQuestionResponse;
 import africa.semicolon.dto.response.UpdateQuestionResponse;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-//@AllArgsConstructor
+@AllArgsConstructor
 public class QuestionServiceImplementation implements QuestionService{
-    @Autowired
     private QuestionRepository questionRepository;
 
     @Override

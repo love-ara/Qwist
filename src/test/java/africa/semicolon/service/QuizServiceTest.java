@@ -18,17 +18,18 @@ import static org.junit.gen5.api.Assertions.assertThrows;
 
 @SpringBootTest
 public class QuizServiceTest {
-    @Autowired
-    private  QuizService quizService;
-    @Autowired
-    private  QuizRepository quizRepository;
-    @Autowired
-    private QuestionRepository questionRepository;
+    private final QuizService quizService;
+    private final QuizRepository quizRepository;
+    private final QuestionRepository questionRepository;
 
     private CreateQuizRequest createQuizRequest;
-    private CreateQuizResponse createQuizResponse;
-    private DeleteQuizRequest deleteQuizRequest;
 
+    @Autowired
+    public QuizServiceTest(QuizService quizService, QuizRepository quizRepository, QuestionRepository questionRepository){
+        this.quizService = quizService;
+        this.quizRepository = quizRepository;
+        this.questionRepository = questionRepository;
+    }
 
     @BeforeEach
     public void setUp(){
@@ -70,9 +71,8 @@ public class QuizServiceTest {
     public void quizCanBeUpdatedTest(){
 
         var quiz = quizService.createQuiz(createQuizRequest);
-        System.out.println(quiz.getQuizId());
 
-        createQuizResponse = new CreateQuizResponse();
+        CreateQuizResponse createQuizResponse = new CreateQuizResponse();
         createQuizResponse.setQuizId(quiz.getQuizId());
 
         UpdateQuizRequest updateQuizRequest = new UpdateQuizRequest();
@@ -81,7 +81,7 @@ public class QuizServiceTest {
         updateQuizRequest.setQuizDescription("Updated Quiz Description");
 
         UpdateQuestionRequest updateQuestionRequest = new UpdateQuestionRequest();
-        updateQuestionRequest.setQuestionId(updateQuizRequest.getUpdateQuestionRequest().getQuestionId());
+        updateQuestionRequest.setQuestionId(questionRepository.findAll().getFirst().getQuestionId());
         updateQuestionRequest.setQuestionContent("Updated Question Content");
         OptionRequest optionRequest = new OptionRequest();
         optionRequest.setOptionContent("Option Content");
@@ -98,7 +98,7 @@ public class QuizServiceTest {
 
         var quiz = quizService.createQuiz(createQuizRequest);
 
-        deleteQuizRequest = new DeleteQuizRequest();
+        DeleteQuizRequest deleteQuizRequest = new DeleteQuizRequest();
         deleteQuizRequest.setQuizId(quiz.getQuizId());
         assertThat(quizRepository.count(), is(1L));
 
