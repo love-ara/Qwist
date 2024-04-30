@@ -100,8 +100,7 @@ public class QuizServiceImplementation implements QuizService{
 
     @Override
     public DeleteQuizResponse deleteQuiz(DeleteQuizRequest deleteQuizRequest) {
-        Quiz quiz = quizRepository.findById(deleteQuizRequest.getQuizId())
-                .orElseThrow(() -> new IllegalArgumentException("Quiz does not exist"));
+        Quiz quiz = findQuizBy(deleteQuizRequest.getQuizId());
         for (Question question : quiz.getQuestions()) {
             DeleteQuestionRequest deleteQuestionRequest = new DeleteQuestionRequest();
             deleteQuestionRequest.setQuestionId(question.getQuestionId());
@@ -113,6 +112,21 @@ public class QuizServiceImplementation implements QuizService{
         deleteQuizResponse.setQuizId(quiz.getQuizId());
         quizRepository.delete(quiz);
         return deleteQuizResponse;
+    }
+
+    private Quiz findQuizBy(String id) {
+        return quizRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Quiz does not exist"));
+    }
+
+    @Override
+    public List<Question> getQuizQuestions(String quizId) {
+        Quiz quiz = findQuizBy(quizId);
+        List<Question> questions = new ArrayList<>();
+        for (Question question : quiz.getQuestions()) {
+
+        }
+        return null;
     }
 }
 

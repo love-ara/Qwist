@@ -3,9 +3,11 @@ package africa.semicolon.service;
 import africa.semicolon.data.model.User;
 import africa.semicolon.data.repository.UserRepository;
 import africa.semicolon.dto.request.RegisterUserRequest;
+import africa.semicolon.dto.request.SelectQuizRequest;
 import africa.semicolon.dto.request.UserLoginRequest;
 import africa.semicolon.dto.request.UserLogoutRequest;
 import africa.semicolon.dto.response.RegisterUserResponse;
+import africa.semicolon.dto.response.SelectQuizResponse;
 import africa.semicolon.dto.response.UserLoginResponse;
 import africa.semicolon.dto.response.UserLogoutResponse;
 import lombok.AllArgsConstructor;
@@ -59,6 +61,11 @@ public class UserServiceImplementation implements UserService{
         user.setLoggedIn(false);
         userRepository.save(user);
         return logoutMap(userLogoutRequest, user);
+    }
+
+    @Override
+    public SelectQuizResponse selectQuiz(SelectQuizRequest selectQuizRequest) {
+        return null;
     }
 //
 //    public boolean authorizeUser(UserLoginRequest userLoginRequest) {

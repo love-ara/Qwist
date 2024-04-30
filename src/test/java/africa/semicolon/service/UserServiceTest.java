@@ -1,14 +1,19 @@
 package africa.semicolon.service;
 
 
+import africa.semicolon.data.model.Question;
+import africa.semicolon.data.repository.QuizRepository;
 import africa.semicolon.data.repository.UserRepository;
 import africa.semicolon.dto.request.RegisterUserRequest;
+import africa.semicolon.dto.request.SelectQuizRequest;
 import africa.semicolon.dto.request.UserLoginRequest;
 import africa.semicolon.dto.request.UserLogoutRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -18,15 +23,16 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class UserServiceTest {
     private final UserService userService;
     private final UserRepository userRepository;
-
+    private QuizService quizService;
     private RegisterUserRequest registerUserRequest;
     private UserLoginRequest userLoginRequest;
     private UserLogoutRequest userLogoutRequest;
 
     @Autowired
-    public UserServiceTest(UserService userService, UserRepository userRepository) {
+    public UserServiceTest(UserService userService, UserRepository userRepository, QuizService quizService) {
         this.userService = userService;
         this.userRepository = userRepository;
+        this.quizService = quizService;
     }
 
     @BeforeEach
@@ -89,5 +95,24 @@ public class UserServiceTest {
         assertThat(userRepository.findAll().getFirst().isLoggedIn(), is(false));
     }
 
+    @Test
+    public void registeredUserCanTakeQuizTest(){
+        userService.registerUser(registerUserRequest);
+        userService.login(userLoginRequest);
+        assertThat(userRepository.count(), is(1L));
+        assertThat(userRepository.findAll().getFirst().isLoggedIn(), is(true));
+
+
+        SelectQuizRequest selectQuizRequest = new SelectQuizRequest();
+        selectQuizRequest.setQuizId("quizId");
+        selectQuizRequest.setQuizCategory("quizCategory");
+
+        userService.selectQuiz(selectQuizRequest);
+
+        List<Question> quizQuestions = quizService.getQuizQuestions(selectQuizRequest.getQuizId());
+
+        assertThat(quizQuestions, not(empty()));
+
+    }
 
 }

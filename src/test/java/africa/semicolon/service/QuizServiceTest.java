@@ -95,13 +95,11 @@ public class QuizServiceTest {
 
     @Test
     public void quizCanBeDeletedTest(){
-
         var quiz = quizService.createQuiz(createQuizRequest);
 
         DeleteQuizRequest deleteQuizRequest = new DeleteQuizRequest();
         deleteQuizRequest.setQuizId(quiz.getQuizId());
         assertThat(quizRepository.count(), is(1L));
-
 
         quizService.deleteQuiz(deleteQuizRequest);
         assertThat(quizRepository.count(), is(0L));
