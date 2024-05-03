@@ -4,6 +4,7 @@ import africa.semicolon.data.repository.QuestionRepository;
 import africa.semicolon.data.repository.QuizRepository;
 import africa.semicolon.dto.request.*;
 import africa.semicolon.dto.response.CreateQuizResponse;
+import africa.semicolon.service.services.QuizService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

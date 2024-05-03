@@ -1,4 +1,4 @@
-package africa.semicolon.service;
+package africa.semicolon.service.impl;
 
 import africa.semicolon.data.model.Counter;
 import africa.semicolon.data.model.Option;
@@ -10,6 +10,8 @@ import africa.semicolon.dto.request.*;
 import africa.semicolon.dto.response.*;
 
 
+import africa.semicolon.service.services.QuestionService;
+import africa.semicolon.service.services.QuizService;
 import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,7 +21,7 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class QuizServiceImplementation implements QuizService{
+public class QuizServiceImplementation implements QuizService {
     private QuizRepository quizRepository;
     private CounterRepository counterRepository;
     private QuestionService questionService;
@@ -27,7 +29,7 @@ public class QuizServiceImplementation implements QuizService{
 
     @Override
     public CreateQuizResponse createQuiz(CreateQuizRequest createQuizRequest) {
-        if(quizRepository.existsByQuizName(createQuizRequest.getQuizTitle())){
+        if(quizRepository.existsByQuizTitle(createQuizRequest.getQuizTitle())){
             throw new IllegalArgumentException("A quiz with this name already exists");
         }
         int currentQuizNumber = getNextQuizNumber();

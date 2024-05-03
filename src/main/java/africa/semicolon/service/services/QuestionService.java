@@ -1,4 +1,4 @@
-package africa.semicolon.service;
+package africa.semicolon.service.services;
 
 import africa.semicolon.dto.request.CreateQuestionRequest;
 import africa.semicolon.dto.request.DeleteQuestionRequest;

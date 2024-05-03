@@ -12,8 +12,6 @@ public class Map {
 
     public static User registerMap(RegisterUserRequest registerUserRequest){
         User user = new User();
-        user.setFirstname(registerUserRequest.getFirstname());
-        user.setLastname(registerUserRequest.getLastname());
         user.setUsername(registerUserRequest.getUsername());
         user.setPassword(registerUserRequest.getPassword());
         user.setEmail(registerUserRequest.getEmail());

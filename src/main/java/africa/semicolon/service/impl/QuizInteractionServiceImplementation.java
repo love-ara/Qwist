@@ -1,17 +1,18 @@
-package africa.semicolon.service;
+package africa.semicolon.service.impl;
 
 import africa.semicolon.data.model.Question;
 import africa.semicolon.data.model.UserAnswer;
 import africa.semicolon.data.repository.QuestionRepository;
 import africa.semicolon.data.repository.UserAnswerRepository;
 import africa.semicolon.dto.response.QuizSession;
+import africa.semicolon.service.services.QuizInteractionService;
 import africa.semicolon.util.UserSession;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class QuizInteractionServiceImplementation implements QuizInteractionService{
+public class QuizInteractionServiceImplementation implements QuizInteractionService {
     private QuestionRepository questionRepository;
     private UserAnswerRepository userAnswerRepository;
 

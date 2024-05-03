@@ -1,4 +1,4 @@
-package africa.semicolon.service;
+package africa.semicolon.service.services;
 
 import africa.semicolon.dto.request.*;
 import africa.semicolon.dto.response.*;

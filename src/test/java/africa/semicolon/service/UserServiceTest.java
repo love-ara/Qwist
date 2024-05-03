@@ -4,6 +4,8 @@ package africa.semicolon.service;
 import africa.semicolon.data.model.Question;
 import africa.semicolon.data.repository.UserRepository;
 import africa.semicolon.dto.request.*;
+import africa.semicolon.service.services.QuizService;
+import africa.semicolon.service.services.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +55,6 @@ public class UserServiceTest {
 
         createQuizRequest = new CreateQuizRequest();
         createQuizRequest.setQuizTitle("Quiz Name");
-        createQuizRequest.setQuizDescription("Quiz Description");
 
         CreateQuestionRequest createQuestionRequest = new CreateQuestionRequest();
         createQuestionRequest.setQuestionContent("Question Content");

@@ -1,10 +1,11 @@
-package africa.semicolon.service;
+package africa.semicolon.service.impl;
 
 import africa.semicolon.data.model.User;
 import africa.semicolon.data.repository.QuizRepository;
 import africa.semicolon.data.repository.UserRepository;
 import africa.semicolon.dto.request.*;
 import africa.semicolon.dto.response.*;
+import africa.semicolon.service.services.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

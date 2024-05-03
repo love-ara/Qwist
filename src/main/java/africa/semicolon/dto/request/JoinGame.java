@@ -1,10 +1,10 @@
 package africa.semicolon.dto.request;
 
+
 import lombok.Data;
 
 @Data
-public class RegisterUserRequest {
+public class JoinGame {
+    private String gamePin;
     private String username;
-    private String email;
-    private String password;
 }

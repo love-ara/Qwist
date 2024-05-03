@@ -1,4 +1,4 @@
-package africa.semicolon.service;
+package africa.semicolon.service.services;
 
 import africa.semicolon.data.model.Question;
 import africa.semicolon.data.model.UserAnswer;

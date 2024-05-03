@@ -1,4 +1,4 @@
-package africa.semicolon.service;
+package africa.semicolon.service.impl;
 
 import africa.semicolon.data.model.Counter;
 import africa.semicolon.data.model.Option;
@@ -14,6 +14,7 @@ import africa.semicolon.dto.response.CreateQuestionResponse;
 import africa.semicolon.dto.response.DeleteQuestionResponse;
 import africa.semicolon.dto.response.OptionResponse;
 import africa.semicolon.dto.response.UpdateQuestionResponse;
+import africa.semicolon.service.services.QuestionService;
 import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,7 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class QuestionServiceImplementation implements QuestionService{
+public class QuestionServiceImplementation implements QuestionService {
     private QuestionRepository questionRepository;
     private CounterRepository counterRepository;
 

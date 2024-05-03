@@ -5,6 +5,7 @@ import africa.semicolon.data.model.UserAnswer;
 import africa.semicolon.data.repository.QuestionRepository;
 import africa.semicolon.data.repository.UserAnswerRepository;
 import africa.semicolon.dto.response.QuizSession;
+import africa.semicolon.service.impl.QuizInteractionServiceImplementation;
 import africa.semicolon.util.UserSession;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

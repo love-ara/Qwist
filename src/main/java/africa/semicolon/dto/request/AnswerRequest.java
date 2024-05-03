@@ -5,5 +5,4 @@ import lombok.Data;
 @Data
 public class AnswerRequest {
     private String questionId;
-
 }

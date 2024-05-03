@@ -5,7 +5,7 @@ import africa.semicolon.dto.request.CreateQuestionRequest;
 import africa.semicolon.dto.request.DeleteQuestionRequest;
 import africa.semicolon.dto.request.UpdateQuestionRequest;
 import africa.semicolon.dto.response.ApiResponse;
-import africa.semicolon.service.QuestionService;
+import africa.semicolon.service.services.QuestionService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;

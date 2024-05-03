@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface QuizRepository extends MongoRepository<Quiz, String> {
-    Quiz findByQuizName(String quizName);
+    Quiz findByQuizTitle(String quizName);
 
-    boolean existsByQuizName(String quizName);
+    boolean existsByQuizTitle(String quizName);
 }
