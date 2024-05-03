@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -37,6 +36,7 @@ public class UserServiceTest {
     public void setUp(){
         userRepository.deleteAll();
 
+
         registerUserRequest = new RegisterUserRequest();
         registerUserRequest.setFirstname("firstname");
         registerUserRequest.setLastname("lastname");
@@ -52,7 +52,7 @@ public class UserServiceTest {
         userLogoutRequest.setUsername("username");
 
         createQuizRequest = new CreateQuizRequest();
-        createQuizRequest.setQuizName("Quiz Name");
+        createQuizRequest.setQuizTitle("Quiz Name");
         createQuizRequest.setQuizDescription("Quiz Description");
 
         CreateQuestionRequest createQuestionRequest = new CreateQuestionRequest();
@@ -120,6 +120,7 @@ public class UserServiceTest {
 
         SelectQuizRequest selectQuizRequest = new SelectQuizRequest();
         selectQuizRequest.setQuizId(quiz.getQuizId());
+        selectQuizRequest.setUsername(userLoginRequest.getUsername());
         //selectQuizRequest.setQuizCategory("quizCategory");
 
         userService.selectQuiz(selectQuizRequest);
@@ -141,6 +142,7 @@ public class UserServiceTest {
 
         SelectQuizRequest selectQuizRequest = new SelectQuizRequest();
         selectQuizRequest.setQuizId(quiz.getQuizId());
+        selectQuizRequest.setUsername(userLoginRequest.getUsername());
         userService.selectQuiz(selectQuizRequest);
 
         TakeQuizRequest takeQuizRequest = new TakeQuizRequest();
@@ -151,5 +153,7 @@ public class UserServiceTest {
 
         userService.takeQuiz(takeQuizRequest);
     }
+
+
 
 }

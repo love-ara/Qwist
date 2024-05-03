@@ -11,8 +11,8 @@ import java.util.List;
 public class Quiz {
     @Id
     private String quizId;
-    private String quizName;
-    private String quizDescription;
+    private int quizNumber;
+    private String quizTitle;
     @DBRef
     private List<Question> questions = new ArrayList<>();
 }

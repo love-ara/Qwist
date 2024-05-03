@@ -11,4 +11,5 @@ public class TakeQuizRequest {
     private String userId;
     private String username;
     private List<String> answer;
+    private List<String> questionIds;
 }

@@ -1,17 +1,46 @@
 package africa.semicolon.data.model;
 
+import io.jsonwebtoken.lang.Collections;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
 
 @Data
-public class User {
-    private String firstname;
-    private String lastname;
+public class User implements UserDetails {
     private String username;
     private String email;
     private String password;
+    private UserType userType;
     @Id
     private String userId;
     private boolean isLoggedIn = false;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Collections.emptyList();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }
 

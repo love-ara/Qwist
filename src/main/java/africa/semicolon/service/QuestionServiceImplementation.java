@@ -1,7 +1,10 @@
 package africa.semicolon.service;
 
+import africa.semicolon.data.model.Counter;
 import africa.semicolon.data.model.Option;
 import africa.semicolon.data.model.Question;
+import africa.semicolon.data.model.QuestionType;
+import africa.semicolon.data.repository.CounterRepository;
 import africa.semicolon.data.repository.QuestionRepository;
 import africa.semicolon.dto.request.CreateQuestionRequest;
 import africa.semicolon.dto.request.DeleteQuestionRequest;
@@ -9,7 +12,9 @@ import africa.semicolon.dto.request.OptionRequest;
 import africa.semicolon.dto.request.UpdateQuestionRequest;
 import africa.semicolon.dto.response.CreateQuestionResponse;
 import africa.semicolon.dto.response.DeleteQuestionResponse;
+import africa.semicolon.dto.response.OptionResponse;
 import africa.semicolon.dto.response.UpdateQuestionResponse;
+import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,17 +25,42 @@ import java.util.List;
 @AllArgsConstructor
 public class QuestionServiceImplementation implements QuestionService{
     private QuestionRepository questionRepository;
+    private CounterRepository counterRepository;
 
     @Override
     public CreateQuestionResponse createQuestion(CreateQuestionRequest createQuestionRequest) {
         if (questionRepository.existsByQuestionContent(createQuestionRequest.getQuestionContent())) {
             throw new IllegalArgumentException("Question already exists");
         }
-        Question question = mapQuestion(createQuestionRequest);
+        int currentQuestionNumber = getNextQuestionNumber();
+        Question question = mapQuestion(createQuestionRequest, currentQuestionNumber);
        var savedQuestion = questionRepository.save(question);
 
         return mapQuestionResponse(savedQuestion);
     }
+
+    @PostConstruct
+    public void initializeCounter() {
+        counterRepository.findById("questionCounter").orElseGet(() -> {
+            Counter counter = new Counter();
+            counter.setId("questionCounter");
+            counter.setCurrentQuestionNumber(0);
+            return counterRepository.save(counter);
+        });
+    }
+
+
+    public int getNextQuestionNumber() {
+        Counter counter = counterRepository.findById("questionCounter").orElseGet(Counter::new);
+
+        int currentQuestionNumber = counter.getCurrentQuestionNumber() + 1;
+        counter.setCurrentQuestionNumber(currentQuestionNumber);
+
+        counterRepository.save(counter);
+
+        return currentQuestionNumber;
+    }
+
 
     @Override
     public UpdateQuestionResponse updateQuestion(UpdateQuestionRequest updateQuestionRequest) {
@@ -52,11 +82,13 @@ public class QuestionServiceImplementation implements QuestionService{
         return deleteQuestionResponse;
     }
 
-//    private static void updateQuestionMap(UpdateQuestionRequest updateQuestionRequest, Question question) {
-//        question.setQuestionId(updateQuestionRequest.getQuestionId());
-//        updateQuestMap(updateQuestionRequest, question);
-//    }
+
     private static void updateQuestMap(UpdateQuestionRequest updateQuestionRequest, Question question) {
+        question.setQuestionId(updateQuestionRequest.getQuestionId());
+
+        int originalCurrentQuestionNumber = question.getCurrentQuestionNumber();
+        question.setCurrentQuestionNumber(originalCurrentQuestionNumber);
+
         question.setQuestionContent(updateQuestionRequest.getQuestionContent());
         List<Option> options = new ArrayList<>();
         for(OptionRequest optionRequest : updateQuestionRequest.getOptions()) {
@@ -65,7 +97,7 @@ public class QuestionServiceImplementation implements QuestionService{
             options.add(option);
         }
         question.setOptions(options);
-        question.setCorrectAnswer(updateQuestionRequest.getAnswer());
+        question.setAnswer(updateQuestionRequest.getAnswer());
     }
 
     private static UpdateQuestionResponse updateQuestionResponseMap(UpdateQuestionRequest updateQuestionRequest, Question updatedQuestion) {
@@ -84,21 +116,37 @@ public class QuestionServiceImplementation implements QuestionService{
     private static CreateQuestionResponse mapQuestionResponse(Question question) {
         CreateQuestionResponse createQuestionResponse = new CreateQuestionResponse();
         createQuestionResponse.setQuestionId(question.getQuestionId());
+        createQuestionResponse.setCurrentQuestionNumber(question.getCurrentQuestionNumber());
+        createQuestionResponse.setQuestionType(String.valueOf(question.getQuestionType()));
+        createQuestionResponse.setQuestionContent(question.getQuestionContent());
+        List<OptionResponse> options = new ArrayList<>();
+        optionResponse(question, options);
+        createQuestionResponse.setOption(options);
+        createQuestionResponse.setAnswer(question.getAnswer());
         return createQuestionResponse;
     }
 
-    private static Question mapQuestion(CreateQuestionRequest createQuestionRequest) {
-        Question question = new Question();
-        question.setQuestionContent(createQuestionRequest.getQuestionContent());
+    private static void optionResponse(Question question, List<OptionResponse> options) {
+        for (Option option : question.getOptions()){
+            OptionResponse optionResponse = new OptionResponse();
+            optionResponse.setOptionContent(option.getOptionContent());
+            options.add(optionResponse);
+        }
+    }
 
+    private static Question mapQuestion(CreateQuestionRequest createQuestionRequest, int currentQuestionNumber ) {
+        Question question = new Question();
+        question.setQuestionType(QuestionType.valueOf(createQuestionRequest.getQuestionType()));
+        question.setQuestionContent(createQuestionRequest.getQuestionContent());
+        question.setCurrentQuestionNumber(currentQuestionNumber);
         List<Option> options = new ArrayList<>();
-        for (int index = 0; index < createQuestionRequest.getOption().size(); index++){
+        for (OptionRequest optionRequest : createQuestionRequest.getOption()){
             Option option = new Option();
-            option.setOptionContent(createQuestionRequest.getOption().get(index).getOptionContent());
+            option.setOptionContent(optionRequest.getOptionContent());
             options.add(option);
         }
         question.setOptions(options);
-        question.setCorrectAnswer(createQuestionRequest.getAnswer());
+        question.setAnswer(createQuestionRequest.getAnswer());
 
         return question;
     }

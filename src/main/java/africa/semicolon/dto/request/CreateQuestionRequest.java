@@ -7,6 +7,7 @@ import java.util.List;
 @Data
 public class CreateQuestionRequest {
     private String questionContent;
+    private String questionType;
     private List<OptionRequest> option = new ArrayList<>();
     private String answer;
 

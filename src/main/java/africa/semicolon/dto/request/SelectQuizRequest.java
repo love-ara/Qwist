@@ -7,4 +7,6 @@ public class SelectQuizRequest {
     private String quizId;
     private String quizName;
     private String quizCategory;
+
+    private String username;
 }

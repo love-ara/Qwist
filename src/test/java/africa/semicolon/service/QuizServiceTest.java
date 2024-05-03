@@ -37,8 +37,7 @@ public class QuizServiceTest {
         questionRepository.deleteAll();
 
         createQuizRequest = new CreateQuizRequest();
-        createQuizRequest.setQuizName("Quiz Name");
-        createQuizRequest.setQuizDescription("Quiz Description");
+        createQuizRequest.setQuizTitle("Quiz Name");
 
         CreateQuestionRequest createQuestionRequest = new CreateQuestionRequest();
         createQuestionRequest.setQuestionContent("Question Content");
