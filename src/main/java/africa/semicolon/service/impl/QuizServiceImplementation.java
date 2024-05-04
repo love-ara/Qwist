@@ -1,9 +1,6 @@
 package africa.semicolon.service.impl;
 
-import africa.semicolon.data.model.Counter;
-import africa.semicolon.data.model.Option;
-import africa.semicolon.data.model.Question;
-import africa.semicolon.data.model.Quiz;
+import africa.semicolon.data.model.*;
 import africa.semicolon.data.repository.CounterRepository;
 import africa.semicolon.data.repository.QuizRepository;
 import africa.semicolon.dto.request.*;
@@ -57,7 +54,7 @@ public class QuizServiceImplementation implements QuizService {
         CreateQuizResponse createQuizResponse = new CreateQuizResponse();
         createQuizResponse.setQuizId(savedQuiz.getQuizId());
         createQuizResponse.setQuizNumber(currentQuizNumber);
-        createQuizResponse.setQuizName(savedQuiz.getQuizTitle());
+        createQuizResponse.setQuizTitle(savedQuiz.getQuizTitle());
         createQuizResponse.setCreateQuestionResponse(questionResponses);
 
 
@@ -68,6 +65,7 @@ public class QuizServiceImplementation implements QuizService {
         var question = questionService.createQuestion(createQuestionRequest);
         Question quizQuestion = new Question();
         quizQuestion.setQuestionId(question.getQuestionId());
+        quizQuestion.setQuestionType(QuestionType.valueOf(question.getQuestionType()));
         quizQuestion.setCurrentQuestionNumber(question.getCurrentQuestionNumber());
         quizQuestion.setQuestionContent(question.getQuestionContent());
         List<Option> optionResponses = new ArrayList<>();
@@ -107,7 +105,7 @@ public class QuizServiceImplementation implements QuizService {
             throw new IllegalArgumentException("A quiz doesn't exists");
         }
         quiz.setQuizId(updateQuizRequest.getQuizId());
-        quiz.setQuizTitle(updateQuizRequest.getQuizName());
+        quiz.setQuizTitle(updateQuizRequest.getQuizTitle());
 
         questionService.updateQuestion(updateQuizRequest.getUpdateQuestionRequest());
 
@@ -117,7 +115,7 @@ public class QuizServiceImplementation implements QuizService {
 
         UpdateQuizResponse updateQuizResponse = new UpdateQuizResponse();
         updateQuizResponse.setUpdateQuizId(updatedQuiz.getQuizId());
-        updateQuizResponse.setUpdatedQuizName(updatedQuiz.getQuizTitle());
+        updateQuizResponse.setUpdatedQuizTitle(updatedQuiz.getQuizTitle());
 
 
 

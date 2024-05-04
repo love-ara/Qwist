@@ -1,5 +1,6 @@
 package africa.semicolon.service;
 
+import africa.semicolon.data.model.QuestionType;
 import africa.semicolon.data.repository.QuestionRepository;
 import africa.semicolon.dto.request.CreateQuestionRequest;
 import africa.semicolon.dto.request.DeleteQuestionRequest;
@@ -36,6 +37,7 @@ public class QuestionServiceTest {
         questionRepository.deleteAll();
 
         createQuestionRequest = new CreateQuestionRequest();
+        createQuestionRequest.setQuestionType(QuestionType.MULTIPLE_CHOICE.name());
         createQuestionRequest.setQuestionContent("Question content");
         OptionRequest optionRequest = new OptionRequest();
         optionRequest.setOptionContent("Option content");

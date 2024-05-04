@@ -5,41 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e13f1b6b-4d57-4193-85b7-7424b09e1c86" name="Changes" comment="commit">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/controller/QuizController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/controller/QuizInteractionController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/controller/UserController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/data/model/Counter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/data/model/Participant.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/data/model/Play.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/data/model/QuestionType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/data/model/UserType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/data/repository/CounterRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/dto/request/JoinGame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/dto/response/ApiResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/dto/response/OptionResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/dto/response/QuizStartResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/service/impl/Interaction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/util/GamePinGenerator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/util/SecurityConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/util/WebSocketConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/africa/semicolon/controller/QuestionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/controller/QuestionController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/africa/semicolon/data/repository/QuizRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/data/repository/QuizRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/africa/semicolon/dto/request/AnswerRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/dto/request/AnswerRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/africa/semicolon/dto/request/RegisterUserRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/dto/request/RegisterUserRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/africa/semicolon/data/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/data/repository/UserRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/africa/semicolon/dto/request/SelectQuizRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/dto/request/SelectQuizRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/africa/semicolon/service/QuestionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/service/services/QuestionService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/africa/semicolon/service/QuestionServiceImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/service/impl/QuestionServiceImplementation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/africa/semicolon/service/QuizInteractionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/service/services/QuizInteractionService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/africa/semicolon/service/QuizInteractionServiceImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/service/impl/QuizInteractionServiceImplementation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/africa/semicolon/service/QuizService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/service/services/QuizService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/africa/semicolon/service/QuizServiceImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/service/impl/QuizServiceImplementation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/africa/semicolon/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/service/services/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/africa/semicolon/service/UserServiceImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/service/impl/UserServiceImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/africa/semicolon/dto/request/TakeQuizRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/dto/request/TakeQuizRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/africa/semicolon/dto/request/UpdateQuizRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/dto/request/UpdateQuizRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/africa/semicolon/dto/response/CreateQuizResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/dto/response/CreateQuizResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/africa/semicolon/dto/response/SelectQuizResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/dto/response/SelectQuizResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/africa/semicolon/dto/response/TakeQuizResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/dto/response/TakeQuizResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/africa/semicolon/dto/response/UpdateQuizResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/dto/response/UpdateQuizResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/africa/semicolon/service/impl/QuizServiceImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/service/impl/QuizServiceImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/africa/semicolon/service/impl/UserServiceImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/service/impl/UserServiceImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/africa/semicolon/util/GamePinGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/util/GamePinGenerator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/africa/semicolon/util/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/util/Map.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/africa/semicolon/service/QuestionServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/africa/semicolon/service/QuestionServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/africa/semicolon/service/QuizInteractionServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/africa/semicolon/service/QuizInteractionServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/africa/semicolon/service/QuizServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/africa/semicolon/service/QuizServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/africa/semicolon/service/UserServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/africa/semicolon/service/UserServiceTest.java" afterDir="false" />
     </list>
@@ -177,34 +157,18 @@
       <recent name="africa.semicolon.service" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.ToQuizOrNotToQuiz">
-    <configuration name="QuizInteractionServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.UserServiceTest">
+    <configuration name="QuizServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="to_quiz_or_not_to_quiz" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="africa.semicolon.service.impl.*" />
+          <option name="PATTERN" value="africa.semicolon.service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="africa.semicolon.service" />
-      <option name="MAIN_CLASS_NAME" value="africa.semicolon.service.QuizInteractionServiceTest" />
+      <option name="MAIN_CLASS_NAME" value="africa.semicolon.service.QuizServiceTest" />
       <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="QuizInteractionServiceTest.testStartQuizSession" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="to_quiz_or_not_to_quiz" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="africa.semicolon.service.impl.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="africa.semicolon.service" />
-      <option name="MAIN_CLASS_NAME" value="africa.semicolon.service.QuizInteractionServiceTest" />
-      <option name="METHOD_NAME" value="testStartQuizSession" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -224,11 +188,27 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="UserServiceTest.registeredUserCanSelectQuizTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="to_quiz_or_not_to_quiz" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="africa.semicolon.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="africa.semicolon.service" />
+      <option name="MAIN_CLASS_NAME" value="africa.semicolon.service.UserServiceTest" />
+      <option name="METHOD_NAME" value="registeredUserCanSelectQuizTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="UserServiceTest.registeredUserCanTakeQuizTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="to_quiz_or_not_to_quiz" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="africa.semicolon.service.impl.*" />
+          <option name="PATTERN" value="africa.semicolon.service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -255,11 +235,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Spring Boot.ToQuizOrNotToQuiz" />
-        <item itemvalue="JUnit.QuizInteractionServiceTest.testStartQuizSession" />
-        <item itemvalue="JUnit.QuizInteractionServiceTest" />
         <item itemvalue="JUnit.UserServiceTest" />
+        <item itemvalue="JUnit.QuizServiceTest" />
+        <item itemvalue="JUnit.UserServiceTest.registeredUserCanSelectQuizTest" />
         <item itemvalue="JUnit.UserServiceTest.registeredUserCanTakeQuizTest" />
+        <item itemvalue="Spring Boot.ToQuizOrNotToQuiz" />
       </list>
     </recent_temporary>
   </component>
@@ -293,6 +273,8 @@
       <workItem from="1714525087268" duration="4798000" />
       <workItem from="1714621733921" duration="26071000" />
       <workItem from="1714731366688" duration="3816000" />
+      <workItem from="1714765311403" duration="3692000" />
+      <workItem from="1714815492277" duration="837000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <option name="closed" value="true" />

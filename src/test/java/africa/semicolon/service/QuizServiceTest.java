@@ -1,5 +1,6 @@
 package africa.semicolon.service;
 
+import africa.semicolon.data.model.QuestionType;
 import africa.semicolon.data.repository.QuestionRepository;
 import africa.semicolon.data.repository.QuizRepository;
 import africa.semicolon.dto.request.*;
@@ -41,6 +42,7 @@ public class QuizServiceTest {
         createQuizRequest.setQuizTitle("Quiz Name");
 
         CreateQuestionRequest createQuestionRequest = new CreateQuestionRequest();
+        createQuestionRequest.setQuestionType(QuestionType.MULTIPLE_CHOICE.name());
         createQuestionRequest.setQuestionContent("Question Content");
         OptionRequest optionRequest = new OptionRequest();
         optionRequest.setOptionContent("Option Content");
@@ -77,7 +79,7 @@ public class QuizServiceTest {
 
         UpdateQuizRequest updateQuizRequest = new UpdateQuizRequest();
         updateQuizRequest.setQuizId(quiz.getQuizId());
-        updateQuizRequest.setQuizName(quiz.getQuizName());
+        updateQuizRequest.setQuizTitle(quiz.getQuizTitle());
         updateQuizRequest.setQuizDescription("Updated Quiz Description");
 
         UpdateQuestionRequest updateQuestionRequest = new UpdateQuestionRequest();

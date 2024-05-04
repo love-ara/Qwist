@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class SelectQuizRequest {
     private String quizId;
-    private String quizName;
+    private String quizTitle;
     private String quizCategory;
     private String username;
 }

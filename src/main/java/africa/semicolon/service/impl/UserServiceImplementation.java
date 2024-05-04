@@ -80,7 +80,7 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
         var quiz = quizService.findById(selectQuizRequest.getQuizId()).orElseThrow(()->new IllegalArgumentException("Quiz not found"));
         SelectQuizResponse response = new SelectQuizResponse();
         response.setQuizId(quiz.getQuizId());
-        response.setQuizName(selectQuizRequest.getQuizName());
+        response.setQuizTitle(selectQuizRequest.getQuizTitle());
         response.setQuestion(List.of(quiz.getQuestions()).toString());
         return response;
     }
@@ -92,7 +92,7 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
 
         SelectQuizRequest request = new SelectQuizRequest();
         request.setQuizId(takeQuizRequest.getQuizId());
-        request.setQuizName(takeQuizRequest.getQuizName());
+        request.setQuizTitle(takeQuizRequest.getQuizTitle());
         request.setUsername(takeQuizRequest.getUsername());
         var response = selectQuiz(request);
 

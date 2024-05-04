@@ -7,7 +7,7 @@ import java.util.List;
 @Data
 public class TakeQuizResponse {
     private String quizId;
-    private String quizName;
+    private String quizTitle;
     private String userId;
     private String username;
     private List<String> userAnswers;
