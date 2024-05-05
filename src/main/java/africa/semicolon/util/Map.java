@@ -6,13 +6,18 @@ import africa.semicolon.dto.request.UserLogoutRequest;
 import africa.semicolon.dto.response.RegisterUserResponse;
 import africa.semicolon.dto.response.UserLoginResponse;
 import africa.semicolon.dto.response.UserLogoutResponse;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class Map {
+    private static final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
 
     public static User registerMap(RegisterUserRequest registerUserRequest){
         User user = new User();
+        String hashedPassword = passwordEncoder.encode(registerUserRequest.getPassword());
+
         user.setUsername(registerUserRequest.getUsername());
-        user.setPassword(registerUserRequest.getPassword());
+        user.setPassword(hashedPassword);
         user.setEmail(registerUserRequest.getEmail());
         return user;
     }

@@ -2,6 +2,7 @@ package africa.semicolon.service;
 
 import africa.semicolon.data.repository.UserRepository;
 import africa.semicolon.dto.request.*;
+import africa.semicolon.service.services.QuizService;
 import africa.semicolon.service.services.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 
+import java.util.Arrays;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -21,11 +23,13 @@ public class UserServiceTest {
     private RegisterUserRequest registerUserRequest;
     private UserLoginRequest userLoginRequest;
     private UserLogoutRequest userLogoutRequest;
+    private QuizService quizService;
 
     @Autowired
-    public UserServiceTest(UserService userService, UserRepository userRepository) {
+    public UserServiceTest(UserService userService, UserRepository userRepository, QuizService quizService) {
         this.userService = userService;
         this.userRepository = userRepository;
+        this.quizService = quizService;
     }
 
     @BeforeEach
@@ -83,6 +87,28 @@ public class UserServiceTest {
         userService.logout(userLogoutRequest);
         assertThat(userRepository.findAll().getFirst().isLoggedIn(), is(false));
     }
+
+    @Test
+    public void unregisteredUserCanNotLoginTest(){
+        UserLoginRequest userLoginRequestAgain = new UserLoginRequest();
+        userLoginRequest.setUsername("unregisteredUser");
+        userLoginRequest.setPassword("password");
+        assertThrows(NullPointerException.class, ()-> userService.login(userLoginRequestAgain));
+    }
+
+    @Test
+    public void unregisteredUserCannotCreateQuizTest(){
+        UserLoginRequest userLoginRequestAgain = new UserLoginRequest();
+        userLoginRequest.setUsername("unregisteredUser");
+        userLoginRequest.setPassword("password");
+        assertThrows(NullPointerException.class, ()-> userService.login(userLoginRequestAgain));
+
+        CreateQuizRequest createQuizRequest = new CreateQuizRequest();
+        createQuizRequest.setQuizTitle("Quiz Title");
+        createQuizRequest.setCreateQuestionRequest(Arrays.asList(new CreateQuestionRequest(), new CreateQuestionRequest()));
+        assertThrows(NullPointerException.class, ()-> quizService.createQuiz(createQuizRequest));
+    }
+
 
 
 

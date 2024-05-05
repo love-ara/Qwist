@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
 
@@ -19,9 +20,15 @@ import static africa.semicolon.util.Map.*;
 @AllArgsConstructor
 public class UserServiceImplementation implements UserService, UserDetailsService {
     private UserRepository userRepository;
+    private final static BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public RegisterUserResponse registerUser(RegisterUserRequest registerUserRequest) {
         validateRegisteredUser(registerUserRequest.getUsername());
+        if(!isEmailValid(registerUserRequest.getEmail())) {
+            throw new IllegalArgumentException("Invalid email address");
+        }
+
+
         User user = registerMap(registerUserRequest);
         User registeredUser = userRepository.save(user);
         return registerUserResponse(registeredUser);
@@ -41,7 +48,8 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
     }
 
     private static void authenticate(String password, User user) {
-        if(!user.getPassword().equals(password)){
+        //BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        if(!passwordEncoder.matches(password, user.getPassword())){
            throw new IllegalArgumentException("Invalid username or password");
         }
     }
@@ -52,13 +60,24 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
         }
     }
 
-    private User findUser(String username){
-        User user = userRepository.findByUsername(username.toLowerCase());
-        if(user == null){
+    private User findUser(String usernameOrEmail){
+        String input = usernameOrEmail.toLowerCase();
+
+        if (isEmailValid(input)) {
+            User user = userRepository.findByEmail(input);
+            if (user == null) {
+                throw new IllegalArgumentException("Email not found");
+            }
+            return user;
+        }
+
+        User user = userRepository.findByUsername(input);
+        if (user == null) {
             throw new IllegalArgumentException("Username not found");
         }
         return user;
     }
+
     private void isUserLoggedIn(String username) {
        var loggedInUser = findUser(username);
        if(!loggedInUser.isLoggedIn()){
@@ -82,6 +101,14 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
             throw new IllegalArgumentException("Username not found");
         }
         return user;
+    }
+
+
+
+    public static boolean isEmailValid(String email) {
+        email = email.toLowerCase();
+        String emailRegex = "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
+        return email.matches(emailRegex);
     }
 }
 
