@@ -1,17 +1,15 @@
 package africa.semicolon.service.services;
 
-import africa.semicolon.data.model.Question;
-import africa.semicolon.data.model.UserAnswer;
 
-import africa.semicolon.dto.response.QuizSession;
-import africa.semicolon.util.UserSession;
+
+import africa.semicolon.dto.request.GetQuizRequest;
+import africa.semicolon.dto.response.GetQuizResponse;
+import africa.semicolon.dto.response.QuizResultResponse;
 import org.springframework.stereotype.Service;
 
 
 @Service
 public interface QuizInteractionService{
-    QuizSession startQuizSession(UserSession userSession);
-   Question getNextQuestion(UserSession userSession);
-    void processAnswer(UserSession session, UserAnswer userAnswer);
-    void moveToNextQuestion(UserSession userSession);
+    GetQuizResponse displayQuiz(String  quizPin);
+    QuizResultResponse collectUserAnswersAndCalculateScore(String quizPin, GetQuizRequest getQuizRequest);
 }

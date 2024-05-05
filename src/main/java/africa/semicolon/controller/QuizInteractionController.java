@@ -1,72 +1,49 @@
 package africa.semicolon.controller;
 
-
-import africa.semicolon.data.model.Question;
-import africa.semicolon.data.model.UserAnswer;
+import africa.semicolon.dto.request.GetQuizRequest;
+import africa.semicolon.dto.request.UserRequest;
 import africa.semicolon.dto.response.ApiResponse;
-import africa.semicolon.dto.response.QuizSession;
 import africa.semicolon.service.services.QuizInteractionService;
-import africa.semicolon.util.UserSession;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import static org.springframework.http.HttpStatus.BAD_REQUEST;
-import static org.springframework.http.HttpStatus.OK;
+import static org.springframework.http.HttpStatus.*;
 
 @RestController
-@RequestMapping("/quiz_starter")
+@RequestMapping("/start")
+@AllArgsConstructor
 public class QuizInteractionController {
-
     private final QuizInteractionService quizInteractionService;
 
-    @Autowired
-    public QuizInteractionController(QuizInteractionService quizInteractionService) {
-        this.quizInteractionService = quizInteractionService;
-    }
-
-    @PostMapping("/start")
-    public ResponseEntity<?> startQuiz(@RequestBody UserSession userSession) {
-        try{
-            QuizSession session = quizInteractionService.startQuizSession(userSession);
-            return new ResponseEntity<>(new ApiResponse(true, session), OK);
-        }catch (IllegalArgumentException e){
-            return new ResponseEntity<>(new ApiResponse(false, e.getMessage()), BAD_REQUEST);
-        }
-
-    }
-
-    @GetMapping("/next_question")
-    public ResponseEntity<?> getNextQuestion(@RequestBody UserSession userSession) {
+    @PostMapping ("/display/{quizPin}")
+    public ResponseEntity<?> displayQuiz(@RequestBody UserRequest userRequest) {
         try {
-            Question question = quizInteractionService.getNextQuestion(userSession);
-            return new ResponseEntity<>(new ApiResponse(true, question), OK);
-        }catch (IllegalArgumentException e) {
-            return new ResponseEntity<>(new ApiResponse(false, e.getMessage()), OK);
+            String quizPin = userRequest.getQuizPin();
+            var quizResponse = quizInteractionService.displayQuiz(quizPin);
+            if (quizResponse == null) {
+                return new ResponseEntity<>(new ApiResponse(false, null), NOT_FOUND);
+            }
+
+            return new ResponseEntity<>(new ApiResponse(true, quizResponse), OK);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return new ResponseEntity<>(new ApiResponse(false, e.getMessage()), INTERNAL_SERVER_ERROR);
         }
     }
 
-    @PostMapping("/submit_answer")
-    public ResponseEntity<?> submitAnswer(@RequestBody UserAnswer userAnswer, UserSession session) {
-        try{
-            quizInteractionService.processAnswer(session, userAnswer);
-            //return new ResponseEntity<>(new ApiResponse(true, userAnswer), OK);
-            return ResponseEntity.noContent().build();
-        }catch (IllegalArgumentException e){
-            return new ResponseEntity<>(new ApiResponse(false, e.getMessage()), OK);
+    @PostMapping("/submit/{quizPin}")
+    public ResponseEntity<?> collectUserAnswersAndCalculateScore(@RequestBody GetQuizRequest getQuizRequest) {
+        try {
+            // Process the request and calculate the user's score
+            var resultResponse = quizInteractionService.collectUserAnswersAndCalculateScore(getQuizRequest.getQuizPin(), getQuizRequest);
+
+            // Return the result wrapped in an ApiResponse object with HTTP status OK (200)
+            return new ResponseEntity<>(new ApiResponse(true, resultResponse), OK);
+        } catch (Exception e) {
+            // If there is an exception, return an ApiResponse object with an error message and HTTP status Internal Server Error (500)
+            return new ResponseEntity<>(new ApiResponse(false, e.getMessage()), INTERNAL_SERVER_ERROR);
         }
-
-    }
-
-    @PostMapping("/next")
-    public ResponseEntity<Void> moveToNextQuestion(@RequestBody UserSession session) {
-        try{
-            quizInteractionService.moveToNextQuestion(session);
-            return ResponseEntity.noContent().build();
-        }catch (IllegalArgumentException e){
-            return ResponseEntity.status(OK).build();
-        }
-
     }
 }
 

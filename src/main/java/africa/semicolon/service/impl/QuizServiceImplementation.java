@@ -9,12 +9,13 @@ import africa.semicolon.dto.response.*;
 
 import africa.semicolon.service.services.QuestionService;
 import africa.semicolon.service.services.QuizService;
-import jakarta.annotation.PostConstruct;
+import africa.semicolon.util.QuizPinGenerator;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 @Service
 @AllArgsConstructor
@@ -29,14 +30,14 @@ public class QuizServiceImplementation implements QuizService {
         if(quizRepository.existsByQuizTitle(createQuizRequest.getQuizTitle())){
             throw new IllegalArgumentException("A quiz with this name already exists");
         }
-        int currentQuizNumber = getNextQuizNumber();
         resetQuestionCounter();
-
 
         Quiz quiz = new Quiz();
 
         quiz.setQuizTitle(createQuizRequest.getQuizTitle());
-        quiz.setQuizNumber(currentQuizNumber);
+
+        String pin = QuizPinGenerator.generateQuizPin();
+        quiz.setQuizPin(pin);
         List<Question> questions = new ArrayList<>();
         List<CreateQuestionResponse> questionResponses = new ArrayList<>();
         for(CreateQuestionRequest createQuestionRequest : createQuizRequest.getCreateQuestionRequest()){
@@ -52,8 +53,8 @@ public class QuizServiceImplementation implements QuizService {
         var savedQuiz = quizRepository.save(quiz);
 
         CreateQuizResponse createQuizResponse = new CreateQuizResponse();
+        createQuizResponse.setQuizPin(savedQuiz.getQuizPin());
         createQuizResponse.setQuizId(savedQuiz.getQuizId());
-        createQuizResponse.setQuizNumber(currentQuizNumber);
         createQuizResponse.setQuizTitle(savedQuiz.getQuizTitle());
         createQuizResponse.setCreateQuestionResponse(questionResponses);
 
@@ -65,6 +66,7 @@ public class QuizServiceImplementation implements QuizService {
         var question = questionService.createQuestion(createQuestionRequest);
         Question quizQuestion = new Question();
         quizQuestion.setQuestionId(question.getQuestionId());
+        quizQuestion.setTimeLimit(question.getTimeLimit());
         quizQuestion.setQuestionType(QuestionType.valueOf(question.getQuestionType()));
         quizQuestion.setCurrentQuestionNumber(question.getCurrentQuestionNumber());
         quizQuestion.setQuestionContent(question.getQuestionContent());
@@ -81,16 +83,10 @@ public class QuizServiceImplementation implements QuizService {
 
     private CreateQuestionResponse questionResponse(Question quizQuestion) {
         CreateQuestionResponse createQuestionResponse = new CreateQuestionResponse();
+        createQuestionResponse.setTimeLimit(quizQuestion.getTimeLimit());
         createQuestionResponse.setCurrentQuestionNumber(quizQuestion.getCurrentQuestionNumber());
         createQuestionResponse.setQuestionId(quizQuestion.getQuestionId());
-        createQuestionResponse.setQuestionContent(quizQuestion.getQuestionContent());
-        List<OptionResponse> optionResponses = new ArrayList<>();
-        for(Option option : quizQuestion.getOptions()) {
-            OptionResponse optionResponse = new OptionResponse();
-            optionResponse.setOptionContent(option.getOptionContent());
-            optionResponses.add(optionResponse);
-        }
-        createQuestionResponse.setOption(optionResponses);
+        questionAndOptionsResponse(quizQuestion, createQuestionResponse);
         createQuestionResponse.setAnswer(quizQuestion.getAnswer());
         return createQuestionResponse;
     }
@@ -143,7 +139,6 @@ public class QuizServiceImplementation implements QuizService {
                 .orElseThrow(() -> new IllegalArgumentException("Quiz does not exist"));
     }
 
-    @Override
     public List<Question> getQuizQuestions(String quizId) {
         Quiz quiz = findQuizBy(quizId);
         return quiz.getQuestions();
@@ -158,27 +153,46 @@ public class QuizServiceImplementation implements QuizService {
         counterRepository.save(counter);
     }
 
-    @PostConstruct
-    public void initializeCounter() {
-        counterRepository.findById("quizCounter").orElseGet(() -> {
-            Counter counter = new Counter();
-            counter.setId("quizCounter");
-            counter.setCurrentQuizNumber(0);
-            counterRepository.save(counter);
-            return counter;
-        });
+    @Override
+    public GetQuizResponse getQuiz(String quizPin){
+        Quiz quiz = quizRepository.findByQuizPin(quizPin);
+        if(quiz == null){
+            throw new IllegalArgumentException("A quiz doesn't exist");
+        }
+
+        GetQuizResponse getQuizResponse = new GetQuizResponse();
+        getQuizResponse.setQuizTitle(quiz.getQuizTitle());
+        List<CreateQuestionResponse> createQuestionResponses = new ArrayList<>();
+        for(Question question : quiz.getQuestions()) {
+            CreateQuestionResponse createQuestionResponse = getQuestion(question);
+
+            createQuestionResponses.add(createQuestionResponse);
+        }
+        getQuizResponse.setGetQuestionResponse(createQuestionResponses);
+        return getQuizResponse;
     }
-    public int getNextQuizNumber() {
-        Counter counter = counterRepository.findById("quizCounter").orElseThrow(() -> new RuntimeException("Counter not found"));
-        int currentQuizNumber = counter.getCurrentQuizNumber() + 1;
-        counter.setCurrentQuizNumber(currentQuizNumber);
-        counterRepository.save(counter);
 
-
-        return currentQuizNumber;
+    private static CreateQuestionResponse getQuestion(Question question) {
+        CreateQuestionResponse createQuestionResponse = new CreateQuestionResponse();
+        createQuestionResponse.setCurrentQuestionNumber(question.getCurrentQuestionNumber());
+        questionAndOptionsResponse(question, createQuestionResponse);
+        return createQuestionResponse;
     }
 
-
+    private static void questionAndOptionsResponse(Question question, CreateQuestionResponse createQuestionResponse) {
+        createQuestionResponse.setQuestionId(question.getQuestionId());
+        createQuestionResponse.setQuestionContent(question.getQuestionContent());
+        createQuestionResponse.setQuestionType(String.valueOf(question.getQuestionType()));
+        List<OptionResponse> optionResponses = new ArrayList<>();
+        for (Option option : question.getOptions()) {
+            OptionResponse optionResponse = new OptionResponse();
+            optionResponse.setOptionContent(option.getOptionContent());
+            optionResponses.add(optionResponse);
+        }
+        createQuestionResponse.setOption(optionResponses);
+        createQuestionResponse.setTimeLimit(question.getTimeLimit());
+        createQuestionResponse.setAnswer(question.getAnswer());
+    }
 
 
 }

@@ -4,16 +4,16 @@ import java.security.SecureRandom;
 import java.util.HashSet;
 import java.util.Set;
 
-public class GamePinGenerator {
+public class QuizPinGenerator {
 
-    private static final int PIN_LENGTH = 6; // Length of the game PIN
+    private static final int PIN_LENGTH = 6;
     private static final String CHARACTERS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final SecureRandom random = new SecureRandom();
 
 
     private static final Set<String> existingPins = new HashSet<>();
 
-    public static String generateGamePin() {
+    public static String generateQuizPin() {
         StringBuilder pin = new StringBuilder(PIN_LENGTH);
 
         for (int i = 0; i < PIN_LENGTH; i++) {
@@ -23,7 +23,7 @@ public class GamePinGenerator {
         String gamePin = pin.toString();
 
         while (existingPins.contains(gamePin)) {
-            gamePin = generateGamePin();
+            gamePin = generateQuizPin();
         }
 
         existingPins.add(gamePin);

@@ -9,4 +9,6 @@ public interface QuizRepository extends MongoRepository<Quiz, String> {
     Quiz findByQuizTitle(String quizTitle);
 
     boolean existsByQuizTitle(String quizTitle);
+
+    Quiz findByQuizPin(String quizPin);
 }

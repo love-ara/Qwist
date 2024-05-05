@@ -40,8 +40,8 @@ public class QuizServiceTest {
 
         createQuizRequest = new CreateQuizRequest();
         createQuizRequest.setQuizTitle("Quiz Name");
-
         CreateQuestionRequest createQuestionRequest = new CreateQuestionRequest();
+        createQuestionRequest.setTimeLimit(12);
         createQuestionRequest.setQuestionType(QuestionType.MULTIPLE_CHOICE.name());
         createQuestionRequest.setQuestionContent("Question Content");
         OptionRequest optionRequest = new OptionRequest();

@@ -1,6 +1,5 @@
 package africa.semicolon.dto.response;
 
-import africa.semicolon.dto.response.OptionResponse;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -14,5 +13,7 @@ public class CreateQuestionResponse {
     private String questionContent;
     private List<OptionResponse> option = new ArrayList<>();
     private String answer;
+    private long timeLimit;
+
 
 }

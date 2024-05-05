@@ -10,5 +10,6 @@ public class CreateQuestionRequest {
     private String questionType;
     private List<OptionRequest> option = new ArrayList<>();
     private String answer;
+    private long timeLimit;
 
 }

@@ -37,6 +37,7 @@ public class QuestionServiceTest {
         questionRepository.deleteAll();
 
         createQuestionRequest = new CreateQuestionRequest();
+        createQuestionRequest.setTimeLimit(12);
         createQuestionRequest.setQuestionType(QuestionType.MULTIPLE_CHOICE.name());
         createQuestionRequest.setQuestionContent("Question content");
         OptionRequest optionRequest = new OptionRequest();
@@ -58,7 +59,8 @@ public class QuestionServiceTest {
     @Test
     public void testThatQuestionCanBeUpdated(){
         var question = questionService.createQuestion(createQuestionRequest);
-        assertThat(questionRepository.findById(question.getQuestionId()).get().getQuestionContent(), is("Question content"));
+
+        assertThat(questionRepository.findById(question.getQuestionId()).orElseThrow(()-> new IllegalArgumentException("Question not found")).getQuestionContent(), is("Question content"));
 
         UpdateQuestionRequest updateQuestionRequest = new UpdateQuestionRequest();
         updateQuestionRequest.setQuestionId(question.getQuestionId());
@@ -70,7 +72,7 @@ public class QuestionServiceTest {
         questionService.updateQuestion(updateQuestionRequest);
 
         assertThat(questionRepository.count(), is(1L));
-        assertThat(questionRepository.findById(question.getQuestionId()).get().getQuestionContent(), is("Updated question"));
+        assertThat(questionRepository.findById(question.getQuestionId()).orElseThrow(()-> new IllegalArgumentException("Question not found")).getQuestionContent(), is("Updated question"));
 
         assertTrue(questionRepository.existsByQuestionContent("Updated question"));
     }

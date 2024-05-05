@@ -1,7 +1,6 @@
 package africa.semicolon.service.impl;
 
 import africa.semicolon.data.model.User;
-import africa.semicolon.data.repository.QuizRepository;
 import africa.semicolon.data.repository.UserRepository;
 import africa.semicolon.dto.request.*;
 import africa.semicolon.dto.response.*;
@@ -12,7 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+
 
 import static africa.semicolon.util.Map.*;
 
@@ -20,7 +19,6 @@ import static africa.semicolon.util.Map.*;
 @AllArgsConstructor
 public class UserServiceImplementation implements UserService, UserDetailsService {
     private UserRepository userRepository;
-    private QuizRepository quizService;
 
     public RegisterUserResponse registerUser(RegisterUserRequest registerUserRequest) {
         validateRegisteredUser(registerUserRequest.getUsername());
@@ -33,7 +31,11 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
     public UserLoginResponse login(UserLoginRequest userLoginRequest) {
         User user = findUser(userLoginRequest.getUsername());
         authenticate(userLoginRequest.getPassword(), user);
-        user.setLoggedIn(true);
+        if(!user.isLoggedIn()){
+            user.setLoggedIn(true);
+        }else{
+            throw new IllegalArgumentException("User already logged in");
+        }
         userRepository.save(user);
         return loginUserResponse(user);
     }
@@ -66,40 +68,12 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
 
     public UserLogoutResponse logout(UserLogoutRequest userLogoutRequest){
         User user = findUser(userLogoutRequest.getUsername());
+        isUserLoggedIn(userLogoutRequest.getUsername());
         user.setLoggedIn(false);
         userRepository.save(user);
         return logoutMap(userLogoutRequest, user);
     }
 
-    @Override
-    public SelectQuizResponse selectQuiz(SelectQuizRequest selectQuizRequest) {
-        //registered, logged-in, not asked too many details
-        findUser(selectQuizRequest.getUsername());
-        isUserLoggedIn(selectQuizRequest.getUsername());
-
-        var quiz = quizService.findById(selectQuizRequest.getQuizId()).orElseThrow(()->new IllegalArgumentException("Quiz not found"));
-        SelectQuizResponse response = new SelectQuizResponse();
-        response.setQuizId(quiz.getQuizId());
-        response.setQuizTitle(selectQuizRequest.getQuizTitle());
-        response.setQuestion(List.of(quiz.getQuestions()).toString());
-        return response;
-    }
-
-    @Override
-    public TakeQuizResponse takeQuiz(TakeQuizRequest takeQuizRequest) {
-        findUser(takeQuizRequest.getUsername());
-        isUserLoggedIn(takeQuizRequest.getQuizId());
-
-        SelectQuizRequest request = new SelectQuizRequest();
-        request.setQuizId(takeQuizRequest.getQuizId());
-        request.setQuizTitle(takeQuizRequest.getQuizTitle());
-        request.setUsername(takeQuizRequest.getUsername());
-        var response = selectQuiz(request);
-
-
-
-        return null;
-    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

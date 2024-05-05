@@ -9,6 +9,5 @@ public interface UserService {
     RegisterUserResponse registerUser(RegisterUserRequest registerUserRequest);
     UserLoginResponse login(UserLoginRequest userLoginRequest);
     UserLogoutResponse logout(UserLogoutRequest userLogoutRequest);
-    SelectQuizResponse selectQuiz(SelectQuizRequest selectQuizRequest);
-    TakeQuizResponse takeQuiz(TakeQuizRequest takeQuizRequest);
+
 }

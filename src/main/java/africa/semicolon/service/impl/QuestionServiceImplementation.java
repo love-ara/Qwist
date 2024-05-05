@@ -21,6 +21,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 @Service
 @AllArgsConstructor
@@ -35,8 +37,11 @@ public class QuestionServiceImplementation implements QuestionService {
         }
         int currentQuestionNumber = getNextQuestionNumber();
         Question question = mapQuestion(createQuestionRequest, currentQuestionNumber);
-       var savedQuestion = questionRepository.save(question);
 
+
+
+
+       var savedQuestion = questionRepository.save(question);
         return mapQuestionResponse(savedQuestion);
     }
 
@@ -117,6 +122,7 @@ public class QuestionServiceImplementation implements QuestionService {
     private static CreateQuestionResponse mapQuestionResponse(Question question) {
         CreateQuestionResponse createQuestionResponse = new CreateQuestionResponse();
         createQuestionResponse.setQuestionId(question.getQuestionId());
+        createQuestionResponse.setTimeLimit(question.getTimeLimit());
         createQuestionResponse.setCurrentQuestionNumber(question.getCurrentQuestionNumber());
         createQuestionResponse.setQuestionType(String.valueOf(question.getQuestionType()));
         createQuestionResponse.setQuestionContent(question.getQuestionContent());
@@ -138,6 +144,7 @@ public class QuestionServiceImplementation implements QuestionService {
     private static Question mapQuestion(CreateQuestionRequest createQuestionRequest, int currentQuestionNumber ) {
         Question question = new Question();
         question.setQuestionType(QuestionType.valueOf(createQuestionRequest.getQuestionType()));
+        question.setTimeLimit(createQuestionRequest.getTimeLimit());
         question.setQuestionContent(createQuestionRequest.getQuestionContent());
         question.setCurrentQuestionNumber(currentQuestionNumber);
         List<Option> options = new ArrayList<>();
@@ -150,5 +157,22 @@ public class QuestionServiceImplementation implements QuestionService {
         question.setAnswer(createQuestionRequest.getAnswer());
 
         return question;
+    }
+
+    public void enforceTimeLimit(Question question){
+        Timer timer = new Timer();
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                handleTimeout(question);
+            }
+
+        };
+        timer.schedule(task, question.getTimeLimit());
+
+    }
+
+    private void handleTimeout(Question question) {
+        System.out.println("Time up!"+ question.getQuestionContent());
     }
 }

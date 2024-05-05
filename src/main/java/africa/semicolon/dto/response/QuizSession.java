@@ -12,7 +12,7 @@ import java.util.Set;
 @Data
 public class QuizSession {
     private String quizId;
-    private String gamePin;
+    private String quizPin;
     private String hostId;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
