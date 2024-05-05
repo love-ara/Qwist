@@ -154,41 +154,88 @@ public class QuizServiceImplementation implements QuizService {
     }
 
     @Override
-    public GetQuizResponse getQuiz(String quizPin){
+    public ViewQuizResponse viewQuiz(String quizPin){
         Quiz quiz = quizRepository.findByQuizPin(quizPin);
+        if(quiz == null){
+            throw new IllegalArgumentException("A quiz doesn't exist");
+        }
+
+        ViewQuizResponse getQuizResponse = new ViewQuizResponse();
+        getQuizResponse.setQuizTitle(quiz.getQuizTitle());
+        List<ViewQuizQuestionResponse> getQuestionResponses = new ArrayList<>();
+        for(Question question : quiz.getQuestions()) {
+
+            ViewQuizQuestionResponse getQuestionResponse = viewQuizQuestion(question);
+            getQuestionResponses.add(getQuestionResponse);
+        }
+        getQuizResponse.setViewQuizQuestionResponses(getQuestionResponses);
+        getQuizResponse.setQuizPin(quiz.getQuizPin());
+
+        return getQuizResponse;
+    }
+
+    private ViewQuizQuestionResponse viewQuizQuestion(Question question) {
+        ViewQuizQuestionResponse viewQuizQuestionResponse = new ViewQuizQuestionResponse();
+        viewQuizQuestionResponse.setQuestionId(question.getQuestionId());
+        viewQuizQuestionResponse.setCurrentQuestionNumber(question.getCurrentQuestionNumber());
+        viewQuizQuestionResponse.setQuestionType(String.valueOf(question.getQuestionType()));
+        viewQuizQuestionResponse.setQuestionContent(question.getQuestionContent());
+        List<OptionResponse> optionResponses = new ArrayList<>();
+        options(question, optionResponses);
+        viewQuizQuestionResponse.setOption(optionResponses);
+        viewQuizQuestionResponse.setTimeLimit(question.getTimeLimit());
+
+        return viewQuizQuestionResponse;
+    }
+
+    @Override
+    public GetQuizResponse getQuiz(GetQuizRequest getQuizRequest) {
+        Quiz quiz = quizRepository.findByQuizPin(getQuizRequest.getQuizPin());
         if(quiz == null){
             throw new IllegalArgumentException("A quiz doesn't exist");
         }
 
         GetQuizResponse getQuizResponse = new GetQuizResponse();
         getQuizResponse.setQuizTitle(quiz.getQuizTitle());
-        List<CreateQuestionResponse> createQuestionResponses = new ArrayList<>();
+        List<GetQuestionResponse> getQuestionResponses = new ArrayList<>();
         for(Question question : quiz.getQuestions()) {
-            CreateQuestionResponse createQuestionResponse = getQuestion(question);
 
-            createQuestionResponses.add(createQuestionResponse);
+            GetQuestionResponse getQuestionResponse = getQuestionResponse(question);
+            getQuestionResponse.setAnswer(question.getAnswer());
+            getQuestionResponses.add(getQuestionResponse);
         }
-        getQuizResponse.setGetQuestionResponse(createQuestionResponses);
+        getQuizResponse.setGetQuestionResponse(getQuestionResponses);
         return getQuizResponse;
     }
 
-    private static CreateQuestionResponse getQuestion(Question question) {
-        CreateQuestionResponse createQuestionResponse = new CreateQuestionResponse();
-        createQuestionResponse.setCurrentQuestionNumber(question.getCurrentQuestionNumber());
-        questionAndOptionsResponse(question, createQuestionResponse);
-        return createQuestionResponse;
+    private static GetQuestionResponse getQuestionResponse(Question question) {
+        GetQuestionResponse getQuestionResponse  = new GetQuestionResponse();
+        getQuestionResponse.setQuestionId(question.getQuestionId());
+        getQuestionResponse.setCurrentQuestionNumber(question.getCurrentQuestionNumber());
+        getQuestionResponse.setQuestionType(String.valueOf(question.getQuestionType()));
+        getQuestionResponse.setQuestionContent(question.getQuestionContent());
+        List<OptionResponse> optionResponses = new ArrayList<>();
+
+        options(question, optionResponses);
+        getQuestionResponse.setOption(optionResponses);
+        getQuestionResponse.setTimeLimit(question.getTimeLimit());
+        return getQuestionResponse;
     }
 
-    private static void questionAndOptionsResponse(Question question, CreateQuestionResponse createQuestionResponse) {
-        createQuestionResponse.setQuestionId(question.getQuestionId());
-        createQuestionResponse.setQuestionContent(question.getQuestionContent());
-        createQuestionResponse.setQuestionType(String.valueOf(question.getQuestionType()));
-        List<OptionResponse> optionResponses = new ArrayList<>();
+    private static void options(Question question, List<OptionResponse> optionResponses) {
         for (Option option : question.getOptions()) {
             OptionResponse optionResponse = new OptionResponse();
             optionResponse.setOptionContent(option.getOptionContent());
             optionResponses.add(optionResponse);
         }
+    }
+
+
+    private static void questionAndOptionsResponse(Question question, CreateQuestionResponse createQuestionResponse) {
+        createQuestionResponse.setQuestionContent(question.getQuestionContent());
+        createQuestionResponse.setQuestionType(String.valueOf(question.getQuestionType()));
+        List<OptionResponse> optionResponses = new ArrayList<>();
+        options(question, optionResponses);
         createQuestionResponse.setOption(optionResponses);
         createQuestionResponse.setTimeLimit(question.getTimeLimit());
         createQuestionResponse.setAnswer(question.getAnswer());

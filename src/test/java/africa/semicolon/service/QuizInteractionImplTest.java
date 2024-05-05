@@ -4,10 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 import africa.semicolon.dto.request.GetQuizRequest;
-import africa.semicolon.dto.response.CreateQuestionResponse;
-import africa.semicolon.dto.response.GetQuizResponse;
-import africa.semicolon.dto.response.OptionResponse;
-import africa.semicolon.dto.response.QuizResultResponse;
+import africa.semicolon.dto.response.*;
 import africa.semicolon.service.impl.QuizInteractionImpl;
 import africa.semicolon.service.services.QuizService;
 import org.junit.jupiter.api.BeforeEach;
@@ -33,13 +30,15 @@ public class QuizInteractionImplTest {
     @Test
     public void testDisplayQuiz() {
         String quizPin = "sampleQuizPin";
+        GetQuizRequest getQuizRequest = new  GetQuizRequest();
+        getQuizRequest.setQuizPin(quizPin);
         GetQuizResponse getQuizResponse = createSampleGetQuizResponse();
 
-        when(mockQuizService.getQuiz(quizPin)).thenReturn(getQuizResponse);
+        when(mockQuizService.getQuiz(getQuizRequest)).thenReturn(getQuizResponse);
 
-        GetQuizResponse response = quizInteraction.displayQuiz(quizPin);
+        ViewQuizResponse response = quizInteraction.displayQuiz(quizPin);
 
-        assertEquals(getQuizResponse.getGetQuestionResponse().size(), response.getGetQuestionResponse().size());
+        assertEquals(getQuizResponse.getGetQuestionResponse().size(), response.getViewQuizQuestionResponses().size());
         assertEquals(getQuizResponse, response);
     }
 
@@ -50,10 +49,10 @@ public class QuizInteractionImplTest {
         getQuizRequest.setQuizPin(quizPin);
 
         GetQuizResponse getQuizResponse = createSampleGetQuizResponse();
-        when(mockQuizService.getQuiz(quizPin)).thenReturn(getQuizResponse);
+        when(mockQuizService.getQuiz(getQuizRequest)).thenReturn(getQuizResponse);
 
         Map<String, String> userAnswers = new HashMap<>();
-        for (CreateQuestionResponse question : getQuizResponse.getGetQuestionResponse()) {
+        for (GetQuestionResponse question : getQuizResponse.getGetQuestionResponse()) {
             userAnswers.put(question.getQuestionId(), question.getAnswer());
         }
         getQuizRequest.setUserAnswers(userAnswers);
@@ -69,7 +68,7 @@ public class QuizInteractionImplTest {
     }
 
     private GetQuizResponse createSampleGetQuizResponse() {
-        CreateQuestionResponse question1 = new CreateQuestionResponse();
+        GetQuestionResponse question1 = new GetQuestionResponse();
         question1.setQuestionId("q1");
         question1.setQuestionContent("What is 2 + 2?");
         question1.setAnswer("4");
@@ -79,7 +78,7 @@ public class QuizInteractionImplTest {
         optionResponse.setOptionContent("4");
         question1.setOption(Arrays.asList(optionResponse, optionResponse));
 
-        CreateQuestionResponse question2 = new CreateQuestionResponse();
+        GetQuestionResponse question2 = new GetQuestionResponse();
         question2.setQuestionId("q2");
         question2.setQuestionContent("What is the capital of France?");
         question2.setAnswer("Paris");

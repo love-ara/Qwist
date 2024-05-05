@@ -4,10 +4,9 @@ import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
-
 @Data
-public class GetQuizResponse {
+public class ViewQuizResponse {
     private String QuizTitle;
-    private List<GetQuestionResponse> getQuestionResponse = new ArrayList<>();
+    private List<ViewQuizQuestionResponse> viewQuizQuestionResponses = new ArrayList<>();
     private String quizPin;
 }

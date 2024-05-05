@@ -35,13 +35,10 @@ public class QuizInteractionController {
     @PostMapping("/submit/{quizPin}")
     public ResponseEntity<?> collectUserAnswersAndCalculateScore(@RequestBody GetQuizRequest getQuizRequest) {
         try {
-            // Process the request and calculate the user's score
             var resultResponse = quizInteractionService.collectUserAnswersAndCalculateScore(getQuizRequest.getQuizPin(), getQuizRequest);
 
-            // Return the result wrapped in an ApiResponse object with HTTP status OK (200)
             return new ResponseEntity<>(new ApiResponse(true, resultResponse), OK);
         } catch (Exception e) {
-            // If there is an exception, return an ApiResponse object with an error message and HTTP status Internal Server Error (500)
             return new ResponseEntity<>(new ApiResponse(false, e.getMessage()), INTERNAL_SERVER_ERROR);
         }
     }
