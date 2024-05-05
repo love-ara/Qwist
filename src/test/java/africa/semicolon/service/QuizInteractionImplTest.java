@@ -30,15 +30,15 @@ public class QuizInteractionImplTest {
     @Test
     public void testDisplayQuiz() {
         String quizPin = "sampleQuizPin";
-        GetQuizRequest getQuizRequest = new  GetQuizRequest();
+        GetQuizRequest getQuizRequest = new GetQuizRequest();
         getQuizRequest.setQuizPin(quizPin);
-        GetQuizResponse getQuizResponse = createSampleGetQuizResponse();
+        ViewQuizResponse getQuizResponse = createSampleGetQuizResponse2();
 
-        when(mockQuizService.getQuiz(getQuizRequest)).thenReturn(getQuizResponse);
+        when(mockQuizService.viewQuiz(quizPin)).thenReturn(getQuizResponse);
 
         ViewQuizResponse response = quizInteraction.displayQuiz(quizPin);
 
-        assertEquals(getQuizResponse.getGetQuestionResponse().size(), response.getViewQuizQuestionResponses().size());
+        assertEquals(getQuizResponse.getViewQuizQuestionResponses().size(), response.getViewQuizQuestionResponses().size());
         assertEquals(getQuizResponse, response);
     }
 
@@ -92,14 +92,29 @@ public class QuizInteractionImplTest {
 
         return getQuizResponse;
     }
+
+    private ViewQuizResponse createSampleGetQuizResponse2() {
+        ViewQuizResponse viewQuizResponse =  new ViewQuizResponse();
+        viewQuizResponse.setQuizPin("sampleQuizPin");
+        ViewQuizQuestionResponse question1 = new ViewQuizQuestionResponse();
+        question1.setQuestionId("q1");
+        question1.setQuestionContent("What is 2 + 2?");
+        question1.setTimeLimit(10000);
+        OptionResponse optionResponse = new OptionResponse();
+        optionResponse.setOptionContent("7");
+        optionResponse.setOptionContent("4");
+        question1.setOption(Arrays.asList(optionResponse, optionResponse));
+
+        ViewQuizQuestionResponse question2 = new ViewQuizQuestionResponse();
+        question2.setQuestionId("q2");
+        question2.setQuestionContent("What is the capital of France?");
+        question2.setTimeLimit(10000);
+        OptionResponse optionResponse1 = new OptionResponse();
+        optionResponse1.setOptionContent("paris");
+        optionResponse1.setOptionContent("London");
+        question2.setOption(Arrays.asList(optionResponse1, optionResponse1));
+
+        viewQuizResponse.setViewQuizQuestionResponses(Arrays.asList(question1, question2));
+        return viewQuizResponse;
+    }
 }
-
-
-
-
-
-
-
-
-
-
