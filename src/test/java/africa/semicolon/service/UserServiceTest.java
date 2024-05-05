@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 
-import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -25,7 +24,7 @@ public class UserServiceTest {
     private RegisterUserRequest registerUserRequest;
     private UserLoginRequest userLoginRequest;
     private UserLogoutRequest userLogoutRequest;
-    private QuizService quizService;
+    private final QuizService quizService;
 
     @Autowired
     public UserServiceTest(UserService userService, UserRepository userRepository, QuizService quizService) {
