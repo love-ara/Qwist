@@ -1,5 +1,6 @@
 package africa.semicolon.service;
 
+import africa.semicolon.data.model.QuestionType;
 import africa.semicolon.data.repository.UserRepository;
 import africa.semicolon.dto.request.*;
 import africa.semicolon.service.services.QuizService;
@@ -11,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 
 import java.util.Arrays;
+import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -33,7 +35,7 @@ public class UserServiceTest {
     }
 
     @BeforeEach
-    public void setUp(){
+    public void setUp() {
         userRepository.deleteAll();
 
 
@@ -64,12 +66,12 @@ public class UserServiceTest {
         registerUserAgain.setPassword("password");
         registerUserAgain.setEmail("email@gmail.com");
 
-        assertThrows(IllegalArgumentException.class, ()-> userService.registerUser(registerUserAgain));
+        assertThrows(IllegalArgumentException.class, () -> userService.registerUser(registerUserAgain));
         assertThat(userRepository.count(), is(1L));
     }
 
     @Test
-    public void userCanLoginTest(){
+    public void userCanLoginTest() {
         userService.registerUser(registerUserRequest);
         userService.login(userLoginRequest);
 
@@ -78,7 +80,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void userCanLogoutTest(){
+    public void userCanLogoutTest() {
         userService.registerUser(registerUserRequest);
         userService.login(userLoginRequest);
         assertThat(userRepository.count(), is(1L));
@@ -89,27 +91,42 @@ public class UserServiceTest {
     }
 
     @Test
-    public void unregisteredUserCanNotLoginTest(){
+    public void unregisteredUserCanNotLoginTest() {
         UserLoginRequest userLoginRequestAgain = new UserLoginRequest();
         userLoginRequest.setUsername("unregisteredUser");
         userLoginRequest.setPassword("password");
-        assertThrows(NullPointerException.class, ()-> userService.login(userLoginRequestAgain));
+        assertThrows(NullPointerException.class, () -> userService.login(userLoginRequestAgain));
     }
 
     @Test
-    public void unregisteredUserCannotCreateQuizTest(){
-        UserLoginRequest userLoginRequestAgain = new UserLoginRequest();
-        userLoginRequest.setUsername("unregisteredUser");
-        userLoginRequest.setPassword("password");
-        assertThrows(NullPointerException.class, ()-> userService.login(userLoginRequestAgain));
+    public void unregisteredUserCannotCreateQuizTest() {
+        UserLoginRequest invalidLoginRequest = new UserLoginRequest();
+        invalidLoginRequest.setUsername("unregisteredUser");
+        invalidLoginRequest.setPassword("password");
+
+        assertThrows(IllegalArgumentException.class, () -> userService.login(invalidLoginRequest));
 
         CreateQuizRequest createQuizRequest = new CreateQuizRequest();
-        createQuizRequest.setQuizTitle("Quiz Title");
-        createQuizRequest.setCreateQuestionRequest(Arrays.asList(new CreateQuestionRequest(), new CreateQuestionRequest()));
-        assertThrows(NullPointerException.class, ()-> quizService.createQuiz(createQuizRequest));
+        createQuizRequest.setQuizTitle("Quiz");
+        CreateQuestionRequest createQuestionRequest = getCreateQuestionRequest();
+        createQuizRequest.setCreateQuestionRequest(List.of(createQuestionRequest));
+
+        assertThrows(IllegalArgumentException.class, () -> quizService.createQuiz(createQuizRequest));
     }
 
+    private static CreateQuestionRequest getCreateQuestionRequest() {
+        CreateQuestionRequest createQuestionRequest = new CreateQuestionRequest();
+        createQuestionRequest.setTimeLimit(12);
+        createQuestionRequest.setQuestionType(QuestionType.MULTIPLE_CHOICE.name());
+        createQuestionRequest.setQuestionContent("Question Content");
 
+        OptionRequest optionRequest = new OptionRequest();
+        optionRequest.setOptionContent("Option Content");
 
+        createQuestionRequest.setOption(List.of(optionRequest));
+        createQuestionRequest.setAnswer("answer");
+
+        return createQuestionRequest;
+    }
 
 }
