@@ -1,11 +1,7 @@
 package africa.semicolon.service.impl;
 
-import africa.semicolon.dto.request.CreateQuizRequest;
-import africa.semicolon.dto.request.RegisterUserRequest;
-import africa.semicolon.dto.request.UserLoginRequest;
-import africa.semicolon.dto.response.CreateQuizResponse;
-import africa.semicolon.dto.response.RegisterUserResponse;
-import africa.semicolon.dto.response.UserLoginResponse;
+import africa.semicolon.dto.request.*;
+import africa.semicolon.dto.response.*;
 import africa.semicolon.service.services.QuizService;
 import africa.semicolon.service.services.UserService;
 import lombok.AllArgsConstructor;
@@ -17,18 +13,27 @@ public class Interaction{
     private QuizService quizService;
     private UserService userService;
 
-    private RegisterUserResponse signUp(RegisterUserRequest registerUserRequest){
+    public RegisterUserResponse signUp(RegisterUserRequest registerUserRequest){
         return userService.registerUser(registerUserRequest);
     }
 
-    private UserLoginResponse login(UserLoginRequest userLoginRequest){
+    public UserLoginResponse login(UserLoginRequest userLoginRequest){
         return userService.login(userLoginRequest);
     }
-    private CreateQuizResponse create(UserLoginRequest loginRequest, CreateQuizRequest createQuizRequest){
+    public CreateQuizResponse create(UserLoginRequest loginRequest, CreateQuizRequest createQuizRequest){
             userService.login(loginRequest);
             return quizService.createQuiz(createQuizRequest);
+    }
 
-        }
+    public DeleteQuizResponse delete(DeleteQuizRequest deleteQuizRequest){
+      return quizService.deleteQuiz(deleteQuizRequest);
+    }
 
+    public UpdateQuizResponse update(UpdateQuizRequest updateQuizRequest){
+        return quizService.updateQuiz(updateQuizRequest);
+    }
+    public UserLogoutResponse logout(UserLogoutRequest userLogoutRequest){
+        return userService.logout(userLogoutRequest);
+    }
 
 }

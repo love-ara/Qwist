@@ -6,9 +6,7 @@ import africa.semicolon.dto.request.*;
 import africa.semicolon.dto.response.*;
 import africa.semicolon.service.services.UserService;
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -18,7 +16,7 @@ import static africa.semicolon.util.Map.*;
 
 @Service
 @AllArgsConstructor
-public class UserServiceImplementation implements UserService, UserDetailsService {
+public class UserServiceImplementation implements UserService {
     private UserRepository userRepository;
     private final static BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -60,7 +58,7 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
         }
     }
 
-    private User findUser(String usernameOrEmail){
+    public User findUser(String usernameOrEmail){
         String input = usernameOrEmail.toLowerCase();
 
         if (isEmailValid(input)) {
@@ -91,16 +89,6 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
         user.setLoggedIn(false);
         userRepository.save(user);
         return logoutMap(userLogoutRequest, user);
-    }
-
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username.toLowerCase());
-        if(user == null){
-            throw new IllegalArgumentException("Username not found");
-        }
-        return user;
     }
 
 

@@ -35,7 +35,7 @@ public class UserServiceTest {
 
     @BeforeEach
     public void setUp() {
-        userRepository.deleteAll();
+        //userRepository.deleteAll();
 
 
         registerUserRequest = new RegisterUserRequest();

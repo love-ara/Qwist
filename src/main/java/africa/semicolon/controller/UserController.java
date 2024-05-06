@@ -20,7 +20,7 @@ import static org.springframework.http.HttpStatus.OK;
 public class UserController {
     private UserService userService;
 
-    @PostMapping("/Register")
+    @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterUserRequest userRequest){
         try{
             var user = userService.registerUser(userRequest);

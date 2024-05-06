@@ -40,6 +40,7 @@ public class QuizServiceTest {
 
         createQuizRequest = new CreateQuizRequest();
         createQuizRequest.setQuizTitle("Quiz Name");
+        createQuizRequest.setUsername("username");
         CreateQuestionRequest createQuestionRequest = new CreateQuestionRequest();
         createQuestionRequest.setTimeLimit(12);
         createQuestionRequest.setQuestionType(QuestionType.MULTIPLE_CHOICE.name());
@@ -79,6 +80,7 @@ public class QuizServiceTest {
 
         UpdateQuizRequest updateQuizRequest = new UpdateQuizRequest();
         updateQuizRequest.setQuizId(quiz.getQuizId());
+        updateQuizRequest.setUsername("username");
         updateQuizRequest.setQuizTitle(quiz.getQuizTitle());
         updateQuizRequest.setQuizDescription("Updated Quiz Description");
 
@@ -101,6 +103,7 @@ public class QuizServiceTest {
 
         DeleteQuizRequest deleteQuizRequest = new DeleteQuizRequest();
         deleteQuizRequest.setQuizId(quiz.getQuizId());
+        deleteQuizRequest.setUsername(quiz.getUsername());
         assertThat(quizRepository.count(), is(1L));
 
         quizService.deleteQuiz(deleteQuizRequest);

@@ -17,5 +17,7 @@ public class Quiz {
     private List<Question> questions = new ArrayList<>();
     private String quizPin;
     private LocalDateTime deadline;
+    @DBRef
+    private User user;
 
 }

@@ -9,4 +9,5 @@ public class ViewQuizResponse {
     private String QuizTitle;
     private List<ViewQuizQuestionResponse> viewQuizQuestionResponses = new ArrayList<>();
     private String quizPin;
+    private String username;
 }

@@ -11,5 +11,5 @@ public class CreateQuizResponse {
     private String quizTitle;
     private List<CreateQuestionResponse> createQuestionResponse = new ArrayList<>();
     private String quizPin;
-
+    private String username;
 }

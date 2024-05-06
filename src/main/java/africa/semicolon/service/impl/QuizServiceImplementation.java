@@ -9,6 +9,7 @@ import africa.semicolon.dto.response.*;
 
 import africa.semicolon.service.services.QuestionService;
 import africa.semicolon.service.services.QuizService;
+import africa.semicolon.service.services.UserService;
 import africa.semicolon.util.QuizPinGenerator;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,11 +24,14 @@ public class QuizServiceImplementation implements QuizService {
     private QuizRepository quizRepository;
     private CounterRepository counterRepository;
     private QuestionService questionService;
+    private UserService userService;
 
 
 
     @Override
     public CreateQuizResponse createQuiz(CreateQuizRequest createQuizRequest) {
+        User user = userService.findUser(createQuizRequest.getUsername());
+        userLoginState(user.getUsername());
         if(quizRepository.existsByQuizTitle(createQuizRequest.getQuizTitle())){
             throw new IllegalArgumentException("A quiz with this name already exists");
         }
@@ -36,7 +40,7 @@ public class QuizServiceImplementation implements QuizService {
         Quiz quiz = new Quiz();
 
         quiz.setQuizTitle(createQuizRequest.getQuizTitle());
-
+        quiz.setUser(user);
         String pin = QuizPinGenerator.generateQuizPin();
         quiz.setQuizPin(pin);
         List<Question> questions = new ArrayList<>();
@@ -58,9 +62,15 @@ public class QuizServiceImplementation implements QuizService {
         createQuizResponse.setQuizId(savedQuiz.getQuizId());
         createQuizResponse.setQuizTitle(savedQuiz.getQuizTitle());
         createQuizResponse.setCreateQuestionResponse(questionResponses);
-
+        createQuizResponse.setUsername(quiz.getUser().getUsername());
 
             return createQuizResponse;
+    }
+
+    private void userLoginState(String username) {
+        if(!isUserLoggedIn(username)){
+            throw new IllegalArgumentException("User is not logged in");
+        }
     }
 
     private Question createQuestion(CreateQuestionRequest createQuestionRequest) {
@@ -93,17 +103,16 @@ public class QuizServiceImplementation implements QuizService {
     }
 
 
-
-
     @Override
     public UpdateQuizResponse updateQuiz(UpdateQuizRequest updateQuizRequest) {
+        User user = userService.findUser(updateQuizRequest.getUsername());
+        userLoginState(user.getUsername());
         Quiz quiz = findQuizBy(updateQuizRequest.getQuizId());
         if(quiz == null){
             throw new IllegalArgumentException("A quiz doesn't exists");
         }
         quiz.setQuizId(updateQuizRequest.getQuizId());
         quiz.setQuizTitle(updateQuizRequest.getQuizTitle());
-
         questionService.updateQuestion(updateQuizRequest.getUpdateQuestionRequest());
 
 
@@ -113,7 +122,7 @@ public class QuizServiceImplementation implements QuizService {
         UpdateQuizResponse updateQuizResponse = new UpdateQuizResponse();
         updateQuizResponse.setUpdateQuizId(updatedQuiz.getQuizId());
         updateQuizResponse.setUpdatedQuizTitle(updatedQuiz.getQuizTitle());
-
+        updateQuizResponse.setUsername(updatedQuiz.getUser().getUsername());
 
 
         return updateQuizResponse;
@@ -121,6 +130,8 @@ public class QuizServiceImplementation implements QuizService {
 
     @Override
     public DeleteQuizResponse deleteQuiz(DeleteQuizRequest deleteQuizRequest) {
+        User user = userService.findUser(deleteQuizRequest.getUsername());
+        userLoginState(user.getUsername());
         Quiz quiz = findQuizBy(deleteQuizRequest.getQuizId());
         for (Question question : quiz.getQuestions()) {
             DeleteQuestionRequest deleteQuestionRequest = new DeleteQuestionRequest();
@@ -171,7 +182,7 @@ public class QuizServiceImplementation implements QuizService {
         }
         getQuizResponse.setViewQuizQuestionResponses(getQuestionResponses);
         getQuizResponse.setQuizPin(quiz.getQuizPin());
-
+        getQuizResponse.setUsername(quiz.getUser().getUsername());
         return getQuizResponse;
     }
 
@@ -240,6 +251,10 @@ public class QuizServiceImplementation implements QuizService {
         createQuestionResponse.setOption(optionResponses);
         createQuestionResponse.setTimeLimit(question.getTimeLimit());
         createQuestionResponse.setAnswer(question.getAnswer());
+    }
+    private boolean isUserLoggedIn(String username){
+        User user = userService.findUser(username);
+        return user.isLoggedIn();
     }
 
 

@@ -8,5 +8,6 @@ import java.util.List;
 @Data
 public class CreateQuizRequest {
    private String quizTitle;
+   private String username;
    private List<CreateQuestionRequest> createQuestionRequest = new ArrayList<>();
 }

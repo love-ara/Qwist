@@ -8,4 +8,5 @@ public class UpdateQuizRequest {
     private String quizTitle;
     private String quizDescription;
     private UpdateQuestionRequest updateQuestionRequest = new UpdateQuestionRequest();
+    private String username;
 }
