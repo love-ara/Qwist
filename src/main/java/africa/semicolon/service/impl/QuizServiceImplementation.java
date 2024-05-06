@@ -30,7 +30,7 @@ public class QuizServiceImplementation implements QuizService {
 
     @Override
     public CreateQuizResponse createQuiz(CreateQuizRequest createQuizRequest) {
-        User user = userService.findUser(createQuizRequest.getUsername());
+        User user = userService.findUserByUsername(createQuizRequest.getUsername());
         userLoginState(user.getUsername());
         if(quizRepository.existsByQuizTitle(createQuizRequest.getQuizTitle())){
             throw new IllegalArgumentException("A quiz with this name already exists");
@@ -105,7 +105,7 @@ public class QuizServiceImplementation implements QuizService {
 
     @Override
     public UpdateQuizResponse updateQuiz(UpdateQuizRequest updateQuizRequest) {
-        User user = userService.findUser(updateQuizRequest.getUsername());
+        User user = userService.findUserByUsername(updateQuizRequest.getUsername());
         userLoginState(user.getUsername());
         Quiz quiz = findQuizBy(updateQuizRequest.getQuizId());
         if(quiz == null){
@@ -130,7 +130,7 @@ public class QuizServiceImplementation implements QuizService {
 
     @Override
     public DeleteQuizResponse deleteQuiz(DeleteQuizRequest deleteQuizRequest) {
-        User user = userService.findUser(deleteQuizRequest.getUsername());
+        User user = userService.findUserByUsername(deleteQuizRequest.getUsername());
         userLoginState(user.getUsername());
         Quiz quiz = findQuizBy(deleteQuizRequest.getQuizId());
         for (Question question : quiz.getQuestions()) {
@@ -253,7 +253,7 @@ public class QuizServiceImplementation implements QuizService {
         createQuestionResponse.setAnswer(question.getAnswer());
     }
     private boolean isUserLoggedIn(String username){
-        User user = userService.findUser(username);
+        User user = userService.findUserByUsername(username);
         return user.isLoggedIn();
     }
 

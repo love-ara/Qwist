@@ -34,7 +34,7 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public UserLoginResponse login(UserLoginRequest userLoginRequest) {
-        User user = findUser(userLoginRequest.getUsername());
+        User user = this.findUserByUsername(userLoginRequest.getUsername());
         authenticate(userLoginRequest.getPassword(), user);
         if(!user.isLoggedIn()){
             user.setLoggedIn(true);
@@ -58,8 +58,8 @@ public class UserServiceImplementation implements UserService {
         }
     }
 
-    public User findUser(String usernameOrEmail){
-        String input = usernameOrEmail.toLowerCase();
+    public User findUserByEmail(String email) {
+        String input = email.toLowerCase();
 
         if (isEmailValid(input)) {
             User user = userRepository.findByEmail(input);
@@ -68,23 +68,27 @@ public class UserServiceImplementation implements UserService {
             }
             return user;
         }
-
-        User user = userRepository.findByUsername(input);
+        return null;
+    }
+    public User findUserByUsername(String username) {
+        User user = userRepository.findByUsername(username);
         if (user == null) {
             throw new IllegalArgumentException("Username not found");
         }
         return user;
+
     }
 
+
     private void isUserLoggedIn(String username) {
-       var loggedInUser = findUser(username);
+       var loggedInUser = this.findUserByUsername(username);
        if(!loggedInUser.isLoggedIn()){
            throw new IllegalArgumentException("User is not logged in");
        }
     }
 
     public UserLogoutResponse logout(UserLogoutRequest userLogoutRequest){
-        User user = findUser(userLogoutRequest.getUsername());
+        User user = this.findUserByUsername(userLogoutRequest.getUsername());
         isUserLoggedIn(userLogoutRequest.getUsername());
         user.setLoggedIn(false);
         userRepository.save(user);
