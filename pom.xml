@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>africa.semicolon</groupId>
-    <artifactId>to_quiz_or_not_to_quiz</artifactId>
+    <artifactId>Qwist</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
