@@ -27,7 +27,6 @@ public class AesTestMain {
         // Here is the encryption method been called
         // It takes in the ObjectToEncrypt as a byte array
         String encryptedData = aesEncryption(dataToEncrypt.getBytes(), key, iv);
-
         System.out.println(encryptedData);
 
         // Here is the decryption method been called
