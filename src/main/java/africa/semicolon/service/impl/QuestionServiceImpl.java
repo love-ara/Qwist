@@ -26,7 +26,7 @@ import java.util.TimerTask;
 
 @Service
 @AllArgsConstructor
-public class QuestionServiceImplementation implements QuestionService {
+public class QuestionServiceImpl implements QuestionService {
     private QuestionRepository questionRepository;
     private CounterRepository counterRepository;
 

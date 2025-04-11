@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="to_quiz_or_not_to_quiz" />
+        <module name="Qwist" />
       </profile>
     </annotationProcessing>
   </component>

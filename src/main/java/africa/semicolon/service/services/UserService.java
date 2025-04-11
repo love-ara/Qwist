@@ -7,8 +7,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface UserService {
-    RegisterUserResponse registerUser(RegisterUserRequest registerUserRequest);
-    UserLoginResponse login(UserLoginRequest userLoginRequest);
-    UserLogoutResponse logout(UserLogoutRequest userLogoutRequest);
+//    RegisterUserResponse registerUser(RegisterUserRequest registerUserRequest);
+//    UserLoginResponse login(UserLoginRequest userLoginRequest);
+//    UserLogoutResponse logout(UserLogoutRequest userLogoutRequest);
     User findUserByUsername(String username);
+//    TakeQuizResponse takeQuiz(TakeQuizRequest takeQuizRequest);
 }
