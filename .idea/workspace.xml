@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e13f1b6b-4d57-4193-85b7-7424b09e1c86" name="Changes" comment="commit">
-      <change afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/util/AESKeyGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/africa/semicolon/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/africa/semicolon/controller/UserController.java" afterDir="false" />
-    </list>
+    <list default="true" id="e13f1b6b-4d57-4193-85b7-7424b09e1c86" name="Changes" comment="commit" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -241,7 +237,7 @@
       <workItem from="1714939971306" duration="24600000" />
       <workItem from="1744229849741" duration="3672000" />
       <workItem from="1744359342728" duration="113000" />
-      <workItem from="1744360319916" duration="4424000" />
+      <workItem from="1744360319916" duration="4835000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <option name="closed" value="true" />
