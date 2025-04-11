@@ -4,6 +4,7 @@ import africa.semicolon.dto.request.RegisterUserRequest;
 import africa.semicolon.dto.request.UserLoginRequest;
 import africa.semicolon.dto.request.UserLogoutRequest;
 import africa.semicolon.dto.response.ApiResponse;
+import africa.semicolon.service.services.AuthService;
 import africa.semicolon.service.services.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ import static org.springframework.http.HttpStatus.OK;
 @RequestMapping("/user")
 @AllArgsConstructor
 public class UserController {
-    private UserService userService;
+    private AuthService userService;
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterUserRequest userRequest){
