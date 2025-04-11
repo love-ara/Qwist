@@ -22,12 +22,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "love-ara"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;love-ara&quot;
   }
-}]]></component>
+}</component>
   <component name="GitToolBoxStore">
     <option name="projectConfigVersion" value="5" />
     <option name="recentBranches">
@@ -54,12 +54,12 @@
       </RecentBranches>
     </option>
   </component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "git@github.com:love-ara/toQuizOrNotQuiz.git",
-    "accountId": "b8f7b7a2-0fdb-4118-8b57-18eb3de33ba5"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;git@github.com:love-ara/toQuizOrNotQuiz.git&quot;,
+    &quot;accountId&quot;: &quot;b8f7b7a2-0fdb-4118-8b57-18eb3de33ba5&quot;
   }
-}]]></component>
+}</component>
   <component name="GoLibraries">
     <option name="indexEntireGoPath" value="true" />
   </component>
@@ -77,61 +77,61 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Application.AESKeyGenerator.executor": "Run",
-    "Application.ToQuizOrNotToQuiz.executor": "Run",
-    "JUnit.QuestionServiceTest.executor": "Run",
-    "JUnit.QuestionServiceTest.noRepeatedQuestionTest.executor": "Run",
-    "JUnit.QuestionServiceTest.questionCanBeCreatedTest.executor": "Run",
-    "JUnit.QuestionServiceTest.questionCanBeDeletedTest.executor": "Run",
-    "JUnit.QuestionServiceTest.testThatQuestionCanBeUpdated.executor": "Run",
-    "JUnit.QuizInteractionImplTest.executor": "Run",
-    "JUnit.QuizInteractionImplTest.testCollectUserAnswersAndCalculateScore.executor": "Run",
-    "JUnit.QuizInteractionServiceTest.executor": "Run",
-    "JUnit.QuizInteractionServiceTest.testStartQuizSession.executor": "Run",
-    "JUnit.QuizServiceTest.executor": "Run",
-    "JUnit.QuizServiceTest.quizCanBeUpdatedTest.executor": "Run",
-    "JUnit.QuizServiceTest.testCreateQuiz.executor": "Run",
-    "JUnit.QuizServiceTest.testThatAQuizCanNotBeCreatedTwice.executor": "Run",
-    "JUnit.UserServiceTest.executor": "Run",
-    "JUnit.UserServiceTest.registeredUserCanSelectQuizTest.executor": "Run",
-    "JUnit.UserServiceTest.registeredUserCanTakeQuizTest.executor": "Run",
-    "JUnit.UserServiceTest.unregisteredUserCanNotLoginTest.executor": "Run",
-    "JUnit.UserServiceTest.userCanBeRegisteredTest.executor": "Run",
-    "JUnit.UserServiceTest.userCanLoginTest.executor": "Run",
-    "JUnit.UserServiceTest.userCanLogoutTest.executor": "Run",
-    "JUnit.UserServiceTest.userCanNotBeRegisteredTest.executor": "Run",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.go.formatter.settings.were.checked": "true",
-    "RunOnceActivity.go.migrated.go.modules.settings": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Spring Boot.ToQuizOrNotToQuiz (1).executor": "Run",
-    "Spring Boot.ToQuizOrNotToQuiz.executor": "Run",
-    "extract.method.default.visibility": "private",
-    "git-widget-placeholder": "main",
-    "go.import.settings.migrated": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Administrator/Documents/Qwist",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "onboarding.tips.debug.path": "C:/Users/Administrator/IdeaProjects/to_quiz_or_not_to_quiz/src/main/java/africa/semicolon/Main.java",
-    "project.structure.last.edited": "SDKs",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "editor.preferences.tabs",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Application.AESKeyGenerator.executor&quot;: &quot;Run&quot;,
+    &quot;Application.ToQuizOrNotToQuiz.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.QuestionServiceTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.QuestionServiceTest.noRepeatedQuestionTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.QuestionServiceTest.questionCanBeCreatedTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.QuestionServiceTest.questionCanBeDeletedTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.QuestionServiceTest.testThatQuestionCanBeUpdated.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.QuizInteractionImplTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.QuizInteractionImplTest.testCollectUserAnswersAndCalculateScore.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.QuizInteractionServiceTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.QuizInteractionServiceTest.testStartQuizSession.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.QuizServiceTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.QuizServiceTest.quizCanBeUpdatedTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.QuizServiceTest.testCreateQuiz.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.QuizServiceTest.testThatAQuizCanNotBeCreatedTwice.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserServiceTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserServiceTest.registeredUserCanSelectQuizTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserServiceTest.registeredUserCanTakeQuizTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserServiceTest.unregisteredUserCanNotLoginTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserServiceTest.userCanBeRegisteredTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserServiceTest.userCanLoginTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserServiceTest.userCanLogoutTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserServiceTest.userCanNotBeRegisteredTest.executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Spring Boot.ToQuizOrNotToQuiz (1).executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.ToQuizOrNotToQuiz.executor&quot;: &quot;Run&quot;,
+    &quot;extract.method.default.visibility&quot;: &quot;private&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Administrator/Documents/Qwist&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/Administrator/IdeaProjects/to_quiz_or_not_to_quiz/src/main/java/africa/semicolon/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.tabs&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="africa.semicolon.dto.response" />
@@ -249,7 +249,7 @@
       <workItem from="1714939971306" duration="24600000" />
       <workItem from="1744229849741" duration="3672000" />
       <workItem from="1744359342728" duration="113000" />
-      <workItem from="1744360319916" duration="6864000" />
+      <workItem from="1744360319916" duration="7071000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <option name="closed" value="true" />
