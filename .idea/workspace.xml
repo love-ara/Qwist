@@ -4,6 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+
     <list default="true" id="e13f1b6b-4d57-4193-85b7-7424b09e1c86" name="Changes" comment="commit" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,6 +78,7 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
@@ -148,6 +150,7 @@
       <recent name="africa.semicolon.service" />
     </key>
   </component>
+
   <component name="RunManager" selected="Application.AESKeyGenerator">
     <configuration name="AESKeyGenerator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="africa.semicolon.util.AESKeyGenerator" />
@@ -162,7 +165,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="QuizServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="QuizInteractionImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="to_quiz_or_not_to_quiz" />
       <extension name="coverage">
         <pattern>
@@ -171,12 +174,13 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="africa.semicolon.service" />
-      <option name="MAIN_CLASS_NAME" value="africa.semicolon.service.QuizServiceTest" />
+      <option name="MAIN_CLASS_NAME" value="africa.semicolon.service.QuizInteractionImplTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+
     <configuration name="ToQuizOrNotToQuiz (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <module name="Qwist" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="africa.semicolon.ToQuizOrNotToQuiz" />
@@ -205,6 +209,7 @@
     </configuration>
     <recent_temporary>
       <list>
+
         <item itemvalue="Application.AESKeyGenerator" />
         <item itemvalue="Spring Boot.ToQuizOrNotToQuiz" />
         <item itemvalue="Spring Boot.ToQuizOrNotToQuiz (1)" />
