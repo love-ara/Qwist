@@ -36,5 +36,4 @@ build/
 
 ### Mac OS ###
 .DS_Store
-
 AES_SECRET_KEY.env
